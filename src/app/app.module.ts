@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserSrvcService } from './services/user-srvc.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatInputModule,
     MatFormFieldModule
   ],
-  providers: [],
+  providers: [UserSrvcService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

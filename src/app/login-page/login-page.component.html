@@ -1,1 +1,22 @@
-<p>login-page works!</p>
+<div class="wrapper">
+    <div class="logo">
+        <img src="../../assets/book-logo-icon-design-vector.webp" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        Login
+    </div>
+    <form class="p-3 mt-3" (ngSubmit)="onLogin()" #logForm="ngForm" >
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="userName" ngModel id="userName" placeholder="Username">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input type="password" name="password" ngModel id="pwd" placeholder="Password">
+        </div>
+        <button type="submit" class="btn mt-3">Login</button>
+    </form>
+    <div class="text-center fs-6">
+        <a href="#">Forget password?</a> or <a routerLink="/sign-up">Sign up</a>
+    </div>
+</div>
