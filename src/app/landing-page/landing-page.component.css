@@ -1,0 +1,21 @@
+.upperbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+.upperbar p {
+    line-height: 10px;
+}
+.cards {
+    overflow: hidden;
+}
+.cards img {
+    transition: transform 0.9s;
+}
+
+.cards img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+
+}
