@@ -1,11 +1,12 @@
-import { Injectable,inject,OnInit } from '@angular/core';
-import { loginValuesModel, logindetails } from '../models/user-reg-model';
+import { Injectable } from '@angular/core';
+import { loginValuesModel } from '../models/user-reg-model';
 import { Router } from '@angular/router';
+import { logindetails } from '../models/login-model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserSrvcService implements OnInit{
+export class UserSrvcService {
 
   constructor( private route:Router ) {
     let localValues = localStorage.getItem('reg-storage');
@@ -23,7 +24,7 @@ export class UserSrvcService implements OnInit{
   ];
 
   registering(usrName:string) {
-    localStorage.setItem('reg-storage', JSON.stringify(this.registrationUpdate));
+    localStorage.setItem('reg-storage',JSON.stringify(this.registrationUpdate));
     const SameUsrname = this.allValues.find((x)=>{return x.regName === usrName});    
   }
 
@@ -48,7 +49,5 @@ ngOnInit(): void {
       alert('Go away');
     }
   }
-
   
-
 }

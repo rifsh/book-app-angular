@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./reg-page.component.css']
 })
 export class RegPageComponent implements OnInit {
-hide:boolean=true;
+  
+  hide:boolean=true;
 srvc:UserSrvcService = inject(UserSrvcService);
 route:Router = inject(Router);
 
@@ -24,6 +25,12 @@ onSubmitreg() {
   let formValues = this.regForm.value;
   this.srvc.registrationUpdate.push(formValues);
   this.route.navigateByUrl('login');
-  this.srvc.registering(this.regForm.value.regName)
+  this.srvc.registering(this.regForm.value.regName);
+  this.regForm.reset();
+
+
+
 }
+
+
 }

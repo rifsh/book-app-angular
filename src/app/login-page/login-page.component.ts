@@ -1,7 +1,7 @@
 import { Component,inject,ViewChild } from '@angular/core';
 import { UserSrvcService } from '../services/user-srvc.service';
 import { NgForm } from '@angular/forms';
-import { logindetails } from '../models/user-reg-model';
+import { logindetails } from '../models/login-model';
 
 @Component({
   selector: 'app-login-page',
@@ -18,9 +18,9 @@ export class LoginPageComponent {
 
   onLogin() {
     let loginValues = this.logForm.value;
-    this.srvc.loginValues.push(loginValues)
-     
+    this.srvc.loginValues.push(loginValues);
     this.srvc.logIn();
+    this.logForm.reset();
     
     
     
