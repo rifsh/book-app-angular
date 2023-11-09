@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
-import { UserProductsService } from '../services/user-products.service';
+import { ActivatedRoute } from '@angular/router';
 import { allProductsModel } from '../models/allproducts.model';
+import { UserProductsService } from '../services/user-products.service';
 
 @Component({
   selector: 'app-collections',
@@ -9,6 +10,10 @@ import { allProductsModel } from '../models/allproducts.model';
 })
 export class CollectionsComponent implements OnInit
 {
+
+  filteredArray : allProductsModel [] = [];
+
+  constructor(private activateRoute: ActivatedRoute, private srvc:UserProductsService) {}
   
   ngOnInit(): void {
     

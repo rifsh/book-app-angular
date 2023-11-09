@@ -8,6 +8,9 @@ import { logindetails } from '../models/login-model';
 })
 export class UserSrvcService {
 
+  showSearchBox:boolean=true;
+  showCart:boolean=true;
+
   constructor( private route:Router ) {
     let localValues = localStorage.getItem('reg-storage');
     if (localStorage!=null) {      

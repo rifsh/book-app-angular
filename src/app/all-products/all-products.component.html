@@ -4,15 +4,14 @@
 <div>
 
     <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;">
-        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Give the Gift of Good Fiction
+        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Give the Gift of Good
+            Fiction
         </h4>
-        <div class="cards container row  d-flex justify-content-center align-items-center " >
-    
+        <div class="cards container row  d-flex justify-content-center align-items-center ">
+
             <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of allProducts">
-                <a routerLink="collection">
-                    <img class="card-img-top w-100"
-                        [src]="i.image"
-                        alt="Card image cap">
+                <a [routerLink]="'/viewproduct/'+(i.id)">
+                    <img class="card-img-top w-100" [src]="i.image" alt="Card image cap">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">{{i.title}}</h5>
@@ -20,9 +19,9 @@
                     <p>Price: {{i.price | currency:'INR'}}</p>
                 </div>
             </div>
+        </div>
     </div>
-</div>
-<hr>
+    <hr>
 
-<!-- footer -->
-<app-footer></app-footer>
+    <!-- footer -->
+    <app-footer></app-footer>

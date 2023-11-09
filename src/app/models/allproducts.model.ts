@@ -6,5 +6,5 @@ export class allProductsModel {
     type:string;
     dessc:string;
     price:number;
-
+    quandity:number = 1;
 }
