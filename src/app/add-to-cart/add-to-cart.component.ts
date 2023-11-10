@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../services/filter.service';
 import { allProductsModel } from '../models/allproducts.model';
 import { UserSrvcService } from '../services/user-srvc.service';
+import { UserProductsService } from '../services/user-products.service';
 
 @Component({
   selector: 'app-add-to-cart',
@@ -17,10 +18,11 @@ export class AddToCartComponent implements OnInit {
   totalQuanndity: number;
 
 
-  constructor(private filterSrvc: FilterService, private usrSrvc: UserSrvcService) { }
+  constructor(private filterSrvc: FilterService, private usrSrvc: UserSrvcService, private prdctsSrvc:UserProductsService) { }
 
   ngOnInit(): void {
     this.products = this.filterSrvc.cartPrdcts;
+    // this.products = this.prdctsSrvc.allProductsSrvc.filter((x)=>{return x.id === 7 })
     this.usrSrvc.showSearchBox = false;
     // this.usrSrvc.showCart = false;
     this.quandity();
@@ -36,7 +38,7 @@ export class AddToCartComponent implements OnInit {
     }
   }
 
-  deletePrdctCart(prdcts) {
+  deletePrdctCart(prdcts?) {
     let index = this.products.indexOf(prdcts);
     this.products.splice(index, 1);
     
