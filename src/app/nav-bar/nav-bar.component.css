@@ -12,3 +12,6 @@
 .dropdown-menu li:hover{
     transform: scale(0.9);
 }
+li {
+    cursor: pointer;
+}

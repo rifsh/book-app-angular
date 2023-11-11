@@ -11,26 +11,29 @@ import { Router } from '@angular/router';
 })
 export class RegPageComponent implements OnInit {
   
-  hide:boolean=true;
+hide:boolean=true;
 srvc:UserSrvcService = inject(UserSrvcService);
 route:Router = inject(Router);
 
-@ViewChild('regForm') regForm:NgForm
+@ViewChild('regForm') regForm:NgForm;
+
+
+constructor(private router: Router) { }
 
 ngOnInit(): void {
   
 }
 
-onSubmitreg() {
-  let formValues = this.regForm.value;
-  this.srvc.registrationUpdate.push(formValues);
-  this.route.navigateByUrl('login');
-  this.srvc.registering(this.regForm.value.regName);
-  this.regForm.reset();
 
-
-
+onFormSubmitted() {
+  const formvalue = this.regForm.value
+  this.srvc.user.push(formvalue);
+  this.srvc.signUp()
+  this.regForm.reset({
+    email: null,
+    username: null,
+    password: null
+  })
 }
-
 
 }

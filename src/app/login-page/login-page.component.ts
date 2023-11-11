@@ -17,13 +17,10 @@ export class LoginPageComponent {
   @ViewChild('logForm') logForm:NgForm
 
   onLogin() {
-    let loginValues = this.logForm.value;
-    this.srvc.loginValues.push(loginValues);
-    this.srvc.logIn();
-    this.logForm.reset();
     
-    
-    
-    
+    let usrName:string = this.logForm.value.userName;
+    let usrPassword:string = this.logForm.value.password;
+    this.srvc.login(usrName,usrPassword,this.logForm.value);
+    this.logForm.reset()
 }
 }

@@ -23,10 +23,11 @@ export class RelatedprdctViewComponent implements OnInit{
     this.relatedProduct = this.srvc.relaPrdct;
     this.type = this.relatedProduct[0].type;
     this.srvcUser.showSearchBox = false;
+    this.srvcUser.showCart = true;
   }
 
   addToCart(prdctid:number) {
     this.srvc.CartFunction(prdctid);
-    alert("Added to cart")
+    // alert("Added to cart");
   }
 }

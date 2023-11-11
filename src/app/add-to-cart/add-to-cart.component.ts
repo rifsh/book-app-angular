@@ -24,7 +24,7 @@ export class AddToCartComponent implements OnInit {
     this.products = this.filterSrvc.cartPrdcts;
     // this.products = this.prdctsSrvc.allProductsSrvc.filter((x)=>{return x.id === 7 })
     this.usrSrvc.showSearchBox = false;
-    // this.usrSrvc.showCart = false;
+    this.usrSrvc.showCart = false;
     this.quandity();
 
   }
@@ -38,11 +38,10 @@ export class AddToCartComponent implements OnInit {
     }
   }
 
-  deletePrdctCart(prdcts?) {
+  deletePrdctCart(prdcts) {
     let index = this.products.indexOf(prdcts);
     this.products.splice(index, 1);
-    
-    
+    this.quandity();
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { allProductsModel } from '../models/allproducts.model';
 import { ActivatedRoute } from '@angular/router';
 import { FilterService } from '../services/filter.service';
+import { UserSrvcService } from '../services/user-srvc.service';
 
 @Component({
   selector: 'app-horror',
@@ -12,11 +13,11 @@ export class HorrorComponent implements OnInit{
 
   horrorBooks:allProductsModel[]=[];
 
-  constructor(private activateRoute:ActivatedRoute, private filterSrvc:FilterService ) {}
+  constructor(private activateRoute:ActivatedRoute, private filterSrvc:FilterService, private srvc:UserSrvcService ) {}
 
 
   ngOnInit(): void {
-
+    this.srvc.showCart = true;
     let routeparam = this.activateRoute.snapshot.paramMap.get("type");
   //   console.log(routeparam);
     

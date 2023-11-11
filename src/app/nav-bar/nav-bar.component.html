@@ -34,21 +34,30 @@
         </li>
       </ul>
       <form class="d-flex" *ngIf="searchCondition" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" [(ngModel)]="searchValue">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" [(ngModel)]="searchValue" (input)="searchOperation()">
+        <button class="btn btn-outline-success" type="submit" (click)="searchOperation()" >Search</button>
       </form>
       <ul class="navbar-nav " style="position: relative;">
-        <li class="nav-item"><a class="nav-link" routerLink="/sign-up">Login or SignUp</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/add-to-cart"  *ngIf="showcart">
-          <div style="display: flex;">
+        <li class="nav-item" *ngIf="logLinkShow"><a class="nav-link" routerLink="/sign-up">Login or SignUp</a>
+        </li>
+        <li class="nav-item" *ngIf="logoutLinkShow"><a class="nav-link"  (click)="logOut()">Logout</a></li>
+        <li class="nav-item" *ngIf="logoutLinkShow"><a  class="nav-link" routerLink="">User: <span style="font-size: 15px; font-weight: bolder;">{{usrname}}</span></a></li>
+        <!-- <li class="nav-item"><a class="nav-link" routerLink="/add-to-cart"  *ngIf="showcart">
+          <div style="display: flex;" >
             <span class="material-icons" style="color: rgb(0, 0, 0);">shopping_cart</span>
             <div style="position: absolute; top: -8px; right: 16px;">
               {{cartCount}}
             </div>
           </div>
-        </a></li>
+        </a></li> -->
+        <div class="demo-section d-flex align-items-center" *ngIf="showcart" >
+          <mat-icon [matBadge]="cartCount" matBadgeColor="warn" routerLink="/add-to-cart">shopping_cart</mat-icon>
+            <!-- Include text description of the icon's meaning for screen-readers -->
+            <span class="cdk-visually-hidden">
+              Example with a home icon with overlaid badge showing the number 15
+            </span>
+        </div>
       </ul>
     </div>
   </div>
-  <!-- <p> {{searchValue}} </p> -->
 </nav>

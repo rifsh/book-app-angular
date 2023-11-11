@@ -10,6 +10,7 @@ import { allProductsModel } from '../models/allproducts.model';
 })
 export class SciFiComponent implements OnInit{
 
+  type:string;
   scifiBooks:allProductsModel[] =[];
 
   constructor(private activateRoute:ActivatedRoute,private filterSrvc:FilterService) {}
@@ -23,6 +24,7 @@ export class SciFiComponent implements OnInit{
 
   this.filterSrvc.fleteringProductsAction(routeparam);
   this.scifiBooks = this.filterSrvc.filteredProducts;
+  this.type = this.scifiBooks[0].type
   }
 
 }

@@ -170,7 +170,7 @@ export class UserProductsService {
       image: '../../assets/all books/eve-history.jpg', price: 250,quandity:1
     },
     {
-      id: 32, title: `The Nutmeg's Curse`, author: 'Amitav Ghosh', type: 'history',
+      id: 32, title: `The Nutmeg Curse`, author: 'Amitav Ghosh', type: 'history',
       dessc: `In this ambitious successor to The Great Derangement, acclaimed writer Amitav Ghosh finds the origins of our contemporary climate crisis in Western colonialism’s violent exploitation of human life and the natural environment.`,
       image: '../../assets/all books/amitav ghosh-history.jpg', price: 950,quandity:1
     },

@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit,Output,EventEmitter } from '@angular/core';
 import { allProductsModel } from '../models/allproducts.model';
 import { UserProductsService } from './user-products.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FilterService {
+export class FilterService implements OnInit {
 
   filteredProducts: allProductsModel[] = [];
   findedProductView: allProductsModel[] = [];
   relaPrdct: allProductsModel[] = [];
-  searchValue:string;
-  cartPrdcts:allProductsModel[]=[];
+  cartPrdcts: allProductsModel[] = [];
+  cartIconCount: number = 0;
+  allBooks: allProductsModel[] = [];
 
   constructor(private srvc: UserProductsService) { }
 
@@ -22,6 +23,11 @@ export class FilterService {
     })
     this.filteredProducts = findeProducts;
   }
+
+  ngOnInit(): void {
+
+  }
+
 
   viewProducts(id: number, prdctSrvctype?: string) {
     let findProduct = this.srvc.allProductsSrvc.filter((x) => {
@@ -35,21 +41,21 @@ export class FilterService {
     this.relaPrdct = relatedPrdctFind;
   }
 
-  CartFunction (cartId:number) {
-    let cartFind = this.srvc.allProductsSrvc.find((x)=>{
+  CartFunction(cartId?: number) {
+    let cartFind = this.srvc.allProductsSrvc.find((x) => {
       return x.id === cartId;
     })
-    let cartInP=this.cartPrdcts.find(x=>x.id===cartId)
+    let cartInP = this.cartPrdcts.find(x => x.id === cartId)
     if (!cartInP) {
       this.cartPrdcts.push(cartFind);
-    }else {
+      this.cartIconCount++;
+    } else {
       alert("Prodect alreadr exist");
     }
-    
 
-    // console.log(this.cartPrdcts);
-    
-    
+
+
   }
+
 
 }

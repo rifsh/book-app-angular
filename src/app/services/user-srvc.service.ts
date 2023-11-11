@@ -9,48 +9,42 @@ import { logindetails } from '../models/login-model';
 export class UserSrvcService {
 
   showSearchBox:boolean=true;
-  showCart:boolean=true;
+  showCart:boolean=false;
+  isLogged:boolean = false;
+  usrname:string;
 
-  constructor( private route:Router ) {
-    let localValues = localStorage.getItem('reg-storage');
-    if (localStorage!=null) {      
-    this.allValues = JSON.parse(localValues);
+  constructor(private router: Router) {
+    const localdata = localStorage.getItem('signUpUsers');
+    if (localdata != null) {
+      this.user = JSON.parse(localdata);
     }
   }
-  
-  registrationUpdate: loginValuesModel[]=[];
+  //signUpdatas: user[] = []
+  logindatas: object[] = [];
+  user: loginValuesModel[] = [];
+  userlogin: logindetails[] = [];
 
-  loginValues:logindetails[]=[]
-
-  allValues:loginValuesModel[]=[
-    
-  ];
-
-  registering(usrName:string) {
-    localStorage.setItem('reg-storage',JSON.stringify(this.registrationUpdate));
-    const SameUsrname = this.allValues.find((x)=>{return x.regName === usrName});    
+  signUp() {
+    localStorage.setItem('signUpUsers', JSON.stringify(this.user))
+    this.router.navigate(['login']);
   }
 
-ngOnInit(): void {
-  
+  login(usrName:string,password:string, loginarr:logindetails) {
+    let findedUser = this.user.filter((x)=>{
+      return x.regName === usrName && x.regPassword === password
+    })
     
-}
-
-  logIn() {
-    let logName:string = this.loginValues[0].userName; 
-    let logPass:string = this.loginValues[0].password; 
-
-    
-    
-    const logCondition = this.allValues.find((x)=>{return x.regName === logName && x.regPassword === logPass});
-    console.log(logCondition);
-    
-    if (logCondition != undefined) {
-      alert('you are logged in successfully');
-      this.route.navigate([''])
+    if (findedUser.length === 0  || loginarr.password ==='' && loginarr.userName === '') {
+      this.showCart = false;
+      alert("You are not authorized")
     }else {
-      alert('Go away');
+      alert('you are authorized');
+      this.usrname = usrName;
+      this.router.navigate(['all-products']);
+      this.showCart = true;
+      this.isLogged = true;
     }
+    
   }
   
 }

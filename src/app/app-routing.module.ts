@@ -13,6 +13,7 @@ import { HorrorComponent } from './horror/horror.component';
 import { ViewprdctComponent } from './viewprdct/viewprdct.component';
 import { RelatedprdctViewComponent } from './relatedprdct-view/relatedprdct-view.component';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
+import { sighnUpGuard } from './guards/sighn-up.guard';
 
 const routes: Routes = [
   {path:'', component:LandingPageComponent},
@@ -24,7 +25,7 @@ const routes: Routes = [
   {path:'history/:type', component:HistoryComponent},
   {path:'horror/:type', component:HorrorComponent},
   {path:'horror/:type', component:HorrorComponent},
-  {path:'viewproduct/:id', component:ViewprdctComponent},
+  {path:'viewproduct/:id', component:ViewprdctComponent, canActivate:[sighnUpGuard]},
   {path:'viewrelatedprdct/:id', component:RelatedprdctViewComponent},
   {path:'add-to-cart', component:AddToCartComponent},
   // {path:'collection/:type', component:CollectionsComponent},

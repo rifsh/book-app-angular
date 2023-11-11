@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatBadgeModule } from '@angular/material/badge';
 import { UserSrvcService } from './services/user-srvc.service';
 import { CollectionsComponent } from './collections/collections.component';
 import { FooterComponent } from './footer/footer.component';
@@ -59,7 +60,8 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatBadgeModule
   ],
   providers: [UserSrvcService,FilterService],
   bootstrap: [AppComponent]

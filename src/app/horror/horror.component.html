@@ -4,12 +4,12 @@
 <div>
 
     <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;">
-        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Give the Gift of Good Fiction
+        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Horro Books
         </h4>
         <div class="cards container row  d-flex justify-content-center align-items-center " >
     
             <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of horrorBooks">
-                <a routerLink="collection">
+                <a [routerLink]="'/viewproduct/'+(i.id)">
                     <img class="card-img-top w-100"
                         [src]="i.image"
                         alt="Card image cap">
