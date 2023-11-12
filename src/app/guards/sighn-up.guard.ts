@@ -13,6 +13,7 @@ export const sighnUpGuard: CanActivateFn = () => {
    if (srvc.isLogged) {
     return true;
    }else {
+    alert('You are not authorized')
     route.navigate(['sign-up']);
     return false;
    }

@@ -1,8 +1,8 @@
 <!-- nav-bar -->
 <app-nav-bar (searchText)="changeSearch($event)"></app-nav-bar>
 
-    <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;">
-        <!-- <button (click)="searchedV">click</button> -->
+    <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;"
+    *ngIf="prdctCondition">
         <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
             Give the Gift of Good Fiction
         </h4>
@@ -24,14 +24,14 @@
     </div>
     <hr>
 
-    <!-- <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;" 
-        >
+    <div class="container-fluid p-5 row" style="display: flex; align-items: center;justify-content: center;" 
+        *ngIf="searchValue.length>0">
         <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-            Give the Gift of Good Fiction
+            Searched Books
         </h4>
         <div class="cards container row  d-flex justify-content-center align-items-center ">
             
-            <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of allProducts ">
+            <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of searchedArray ">
                 <div >
                     <a [routerLink]="'/viewproduct/'+(i.id)">
                         <img class="card-img-top w-100" [src]="i.image" alt="Card image cap">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- footer -->
     <app-footer></app-footer>

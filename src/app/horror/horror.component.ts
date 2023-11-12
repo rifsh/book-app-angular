@@ -17,16 +17,11 @@ export class HorrorComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.srvc.showCart = true;
-    let routeparam = this.activateRoute.snapshot.paramMap.get("type");
-  //   console.log(routeparam);
-    
-  //   let findedArray = this.srvc.allProductsSrvc.filter((x)=>{return x.type === routeparam})
-  //   this.actionaBooks = findedArray;
-
+  let routeparam = this.activateRoute.snapshot.paramMap.get("type");
+  this.srvc.showSearchBox = false;
   this.filterSrvc.fleteringProductsAction(routeparam);
   this.horrorBooks = this.filterSrvc.filteredProducts;
-    
+  
   }
 
 }

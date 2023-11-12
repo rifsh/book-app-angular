@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserProductsService } from '../services/user-products.service';
 import { FilterService } from '../services/filter.service';
 import { allProductsModel } from '../models/allproducts.model';
+import { UserSrvcService } from '../services/user-srvc.service';
 
 @Component({
   selector: 'app-action',
@@ -13,17 +14,13 @@ export class ActionComponent implements OnInit{
 
   actionaBooks:allProductsModel [] = [];
 
-  constructor(private activateRoute:ActivatedRoute, private srvc:UserProductsService, private filterSrvc:FilterService ) {}
+  constructor(private activateRoute:ActivatedRoute, private srvc:UserSrvcService, private filterSrvc:FilterService ) {}
   
 ngOnInit(): void {
   let routeparam = this.activateRoute.snapshot.paramMap.get("type");
-  //   console.log(routeparam);
-    
-  //   let findedArray = this.srvc.allProductsSrvc.filter((x)=>{return x.type === routeparam})
-  //   this.actionaBooks = findedArray;
-
   this.filterSrvc.fleteringProductsAction(routeparam);
   this.actionaBooks = this.filterSrvc.filteredProducts;
+  this.srvc.showSearchBox = false;
 
 }
 }

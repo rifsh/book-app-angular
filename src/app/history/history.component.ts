@@ -18,15 +18,11 @@ export class HistoryComponent implements OnInit{
   constructor(private activateRoute:ActivatedRoute, private filterSrvc:FilterService,private srvc: UserSrvcService ) {}
 
 ngOnInit(): void {
+  this.srvc.showSearchBox = false;
   let routeparam = this.activateRoute.snapshot.paramMap.get("type");
-  this.srvc.showCart = true;
-  //   console.log(routeparam);
-    
-  //   let findedArray = this.srvc.allProductsSrvc.filter((x)=>{return x.type === routeparam})
-  //   this.actionaBooks = findedArray;
-
   this.filterSrvc.fleteringProductsAction(routeparam);
   this.historyBooks = this.filterSrvc.filteredProducts;
+  
 }
 
 languageFilter() {

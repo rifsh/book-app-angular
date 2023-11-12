@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilterService } from '../services/filter.service';
 import { allProductsModel } from '../models/allproducts.model';
+import { UserSrvcService } from '../services/user-srvc.service';
 
 @Component({
   selector: 'app-sci-fi',
@@ -13,15 +14,11 @@ export class SciFiComponent implements OnInit{
   type:string;
   scifiBooks:allProductsModel[] =[];
 
-  constructor(private activateRoute:ActivatedRoute,private filterSrvc:FilterService) {}
+  constructor(private activateRoute:ActivatedRoute,private filterSrvc:FilterService,private srvc:UserSrvcService) {}
 
   ngOnInit(): void {
-    let routeparam = this.activateRoute.snapshot.paramMap.get("type");
-  //   console.log(routeparam);
-    
-  //   let findedArray = this.srvc.allProductsSrvc.filter((x)=>{return x.type === routeparam})
-  //   this.actionaBooks = findedArray;
-
+  let routeparam = this.activateRoute.snapshot.paramMap.get("type");
+  this.srvc.showSearchBox = false;
   this.filterSrvc.fleteringProductsAction(routeparam);
   this.scifiBooks = this.filterSrvc.filteredProducts;
   this.type = this.scifiBooks[0].type

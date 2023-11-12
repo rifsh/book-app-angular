@@ -11,6 +11,7 @@ import { FilterService } from '../services/filter.service';
   styleUrls: ['./all-products.component.css']
 })
 export class AllProductsComponent implements OnInit {
+  prdctCondition:boolean = true;
   allProducts: allProductsModel[] = [];
   searchValue: string = '';
   searchedArray: allProductsModel[] = []
@@ -21,22 +22,25 @@ export class AllProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.usrsrvc.showSearchBox = true;
-    // this.usrsrvc.showCart = true;
+    if (this.usrsrvc.isLogged) {
+      this.usrsrvc.showCart = true;
+    }
     this.allProducts = this.srvc.allProductsSrvc;
-    // this.filterSrvc.searchValue.subscribe((v) => {
-    //   this.searchValue = v;
-    // })
-
     
-
-
   }
+
   changeSearch(searchContent: string) {
     
     this.searchValue = searchContent;
-    console.log(
-      this.searchValue
-    );
+    console.log(this.searchValue.length);
+    this.searchedArray = this.allProducts.filter((x)=>{return x.title.toLowerCase().includes(this.searchValue.toLowerCase())});
+    
+    if (this.searchValue.length === 0) {
+      this.prdctCondition = true;
+    }else {
+      this.prdctCondition = false;
+    }
+
     
   }
   

@@ -40,8 +40,8 @@ export class UserSrvcService {
     }else {
       alert('you are authorized');
       this.usrname = usrName;
-      this.router.navigate(['all-products']);
       this.showCart = true;
+      this.router.navigate(['all-products']);
       this.isLogged = true;
     }
     

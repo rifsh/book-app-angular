@@ -40,7 +40,6 @@ export class NavBarComponent implements OnInit, OnChanges {
 
 
   dropdownValue(drpValue: string) {
-    this.usrSrvc.showCart = true;
     this.drpdownValue = drpValue;
   }
   ngOnInit(): void {
