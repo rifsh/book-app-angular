@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { UserProductsService } from '../services/user-products.service';
 import { UserSrvcService } from '../services/user-srvc.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,9 +12,9 @@ import { FilterService } from '../services/filter.service';
 })
 export class AllProductsComponent implements OnInit {
   prdctCondition:boolean = true;
-  allProducts: allProductsModel[] = [];
+  allProducts: ProductModel[] = [];
   searchValue: string = '';
-  searchedArray: allProductsModel[] = []
+  searchedArray: ProductModel[] = []
   constructor(private srvc: UserProductsService, private usrsrvc: UserSrvcService, private activateRoute: ActivatedRoute, private filterSrvc: FilterService) {
 
   }
@@ -32,7 +32,7 @@ export class AllProductsComponent implements OnInit {
   changeSearch(searchContent: string) {
     
     this.searchValue = searchContent;
-    console.log(this.searchValue.length);
+    
     this.searchedArray = this.allProducts.filter((x)=>{return x.title.toLowerCase().includes(this.searchValue.toLowerCase())});
     
     if (this.searchValue.length === 0) {

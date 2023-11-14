@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ export class UserProductsService {
 
   constructor() { }
 
-  allProductsSrvc: allProductsModel[] = [
+  allProductsSrvc: ProductModel[] = [
     {
       id: 1, title: 'Jurassic Park', author: 'Michael Crichton', type: 'action',
       dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankind’s most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,

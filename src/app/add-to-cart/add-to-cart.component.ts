@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterService } from '../services/filter.service';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { UserSrvcService } from '../services/user-srvc.service';
 import { UserProductsService } from '../services/user-products.service';
 
@@ -12,8 +12,8 @@ import { UserProductsService } from '../services/user-products.service';
 export class AddToCartComponent implements OnInit {
 
   priceFind: number;
-  products: allProductsModel[] = [];
-  mainProducts: allProductsModel[] = [];
+  products: ProductModel[] = [];
+  mainProducts: ProductModel[] = [];
   totalPrice: number;
   totalQuanndity: number;
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { ActivatedRoute } from '@angular/router';
 import { FilterService } from '../services/filter.service';
 import { UserSrvcService } from '../services/user-srvc.service';
@@ -10,8 +10,8 @@ import { UserSrvcService } from '../services/user-srvc.service';
   styleUrls: ['./relatedprdct-view.component.css']
 })
 export class RelatedprdctViewComponent implements OnInit{
-  productsView:allProductsModel[]=[];
-  relatedProduct:allProductsModel []=[];
+  productsView:ProductModel[]=[];
+  relatedProduct:ProductModel []=[];
   type:string;
 
   constructor( private activateRoute:ActivatedRoute,private srvc:FilterService,private srvcUser:UserSrvcService ) {}

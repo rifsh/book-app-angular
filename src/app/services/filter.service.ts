@@ -1,5 +1,5 @@
 import { Injectable, OnInit,Output,EventEmitter } from '@angular/core';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { UserProductsService } from './user-products.service';
 
 @Injectable({
@@ -7,12 +7,12 @@ import { UserProductsService } from './user-products.service';
 })
 export class FilterService implements OnInit {
 
-  filteredProducts: allProductsModel[] = [];
-  findedProductView: allProductsModel[] = [];
-  relaPrdct: allProductsModel[] = [];
-  cartPrdcts: allProductsModel[] = [];
+  filteredProducts: ProductModel[] = [];
+  findedProductView: ProductModel[] = [];
+  relaPrdct: ProductModel[] = [];
+  cartPrdcts: ProductModel[] = [];
   cartIconCount: number = 0;
-  allBooks: allProductsModel[] = [];
+  allBooks: ProductModel[] = [];
 
   constructor(private srvc: UserProductsService) { }
 
@@ -52,9 +52,6 @@ export class FilterService implements OnInit {
     } else {
       alert("Prodect alreadr exist");
     }
-
-
-
   }
 
 

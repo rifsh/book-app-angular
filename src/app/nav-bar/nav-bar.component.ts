@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
 import { UserSrvcService } from '../services/user-srvc.service';
 import { UserProductsService } from '../services/user-products.service';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { FilterService } from '../services/filter.service';
 import { Router } from '@angular/router';
 import { NodeStyleEventEmitter } from 'rxjs/internal/observable/fromEvent';
@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit, OnChanges {
   drpdownValue: string = 'Collections';
   selected = 'option2';
   searchValue: string;
-  searchedArray: allProductsModel[] = [];
+  searchedArray: ProductModel[] = [];
   cartCount: number;
   usrname:string;
 

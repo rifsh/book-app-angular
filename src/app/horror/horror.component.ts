@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { ActivatedRoute } from '@angular/router';
 import { FilterService } from '../services/filter.service';
 import { UserSrvcService } from '../services/user-srvc.service';
@@ -11,7 +11,7 @@ import { UserSrvcService } from '../services/user-srvc.service';
 })
 export class HorrorComponent implements OnInit{
 
-  horrorBooks:allProductsModel[]=[];
+  horrorBooks:ProductModel[]=[];
 
   constructor(private activateRoute:ActivatedRoute, private filterSrvc:FilterService, private srvc:UserSrvcService ) {}
 

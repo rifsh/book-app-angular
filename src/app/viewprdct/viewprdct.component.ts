@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilterService } from '../services/filter.service';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { UserSrvcService } from '../services/user-srvc.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { UserSrvcService } from '../services/user-srvc.service';
   styleUrls: ['./viewprdct.component.css']
 })
 export class ViewprdctComponent implements OnInit {
-  productsView: allProductsModel[] = [];
-  relatedProduct: allProductsModel[] = [];
+  productsView: ProductModel[] = [];
+  relatedProduct: ProductModel[] = [];
   type: string;
   cartIncerment: number = 0;
 

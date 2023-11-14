@@ -1,4 +1,4 @@
-export class allProductsModel {
+export class ProductModel {
     id:number;
     image:string;
     title:string;

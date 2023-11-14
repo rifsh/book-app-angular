@@ -25,7 +25,6 @@ import { SciFiComponent } from './sci-fi/sci-fi.component';
 import { FilterService } from './services/filter.service';
 import { HistoryComponent } from './history/history.component';
 import { HorrorComponent } from './horror/horror.component';
-import { SearchPipe } from './pipe/search.pipe';
 import { ViewprdctComponent } from './viewprdct/viewprdct.component';
 import { RelatedprdctViewComponent } from './relatedprdct-view/relatedprdct-view.component';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
@@ -45,7 +44,6 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
     SciFiComponent,
     HistoryComponent,
     HorrorComponent,
-    SearchPipe,
     ViewprdctComponent,
     RelatedprdctViewComponent,
     AddToCartComponent

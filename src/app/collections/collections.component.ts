@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { allProductsModel } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { UserProductsService } from '../services/user-products.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UserProductsService } from '../services/user-products.service';
 export class CollectionsComponent implements OnInit
 {
 
-  filteredArray : allProductsModel [] = [];
+  filteredArray : ProductModel [] = [];
 
   constructor(private activateRoute: ActivatedRoute, private srvc:UserProductsService) {}
   
