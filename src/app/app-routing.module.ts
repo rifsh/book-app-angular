@@ -1,39 +1,37 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { RegPageComponent } from './reg-page/reg-page.component';
+import { ErrorUrlComponent } from './core/error-url/error-url.component';
+import { sighnUpGuard } from './core/guards/sighn-up.guard';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { CollectionsComponent } from './collections/collections.component';
-import { AllProductsComponent } from './all-products/all-products.component';
-import { ErrorUrlComponent } from './error-url/error-url.component';
-import { ActionComponent } from './action/action.component';
-import { SciFiComponent } from './sci-fi/sci-fi.component';
-import { HistoryComponent } from './history/history.component';
-import { HorrorComponent } from './horror/horror.component';
-import { ViewprdctComponent } from './viewprdct/viewprdct.component';
-import { RelatedprdctViewComponent } from './relatedprdct-view/relatedprdct-view.component';
-import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
-import { sighnUpGuard } from './guards/sighn-up.guard';
+import { ActionBooksComponent } from './products-module/action-books/action-books.component';
+import { AddToCartComponent } from './products-module/add-to-cart/add-to-cart.component';
+import { HistoryBooksComponent } from './products-module/history-books/history-books.component';
+import { HorrorBooksComponent } from './products-module/horror-books/horror-books.component';
+import { RelatedprdctViewComponent } from './products-module/relatedprdct-view/relatedprdct-view.component';
+import { ScfiBooksComponent } from './products-module/scfi-books/scfi-books.component';
+import { ViewProductComponent } from './products-module/view-product/view-product.component';
+import { RegPageComponent } from './reg-page/reg-page.component';
 
 const routes: Routes = [
-  {path:'', component:LandingPageComponent},
+  {path:'home', loadChildren:()=> import('./core/core.module').then(m=>m.CoreModule)},
+  {path:'', redirectTo:'home',pathMatch:'full'},
   {path:'sign-up', component:RegPageComponent},
   {path:'login', component:LoginPageComponent},
-  {path:'all-products', component:AllProductsComponent},
-  {path:'action/:type', component:ActionComponent},
-  {path:'sci-fi/:type', component:SciFiComponent},
-  {path:'history/:type', component:HistoryComponent},
-  {path:'horror/:type', component:HorrorComponent},
-  {path:'horror/:type', component:HorrorComponent},
-  {path:'viewproduct/:id', component:ViewprdctComponent, canActivate:[sighnUpGuard]},
+  {path:'all-products', loadChildren: ()=>import ('./products-module/products-module.module').then(m=>m.ProductsModuleModule)},
+  {path:'action/:type', component:ActionBooksComponent},
+  {path:'sci-fi/:type', component:ScfiBooksComponent},
+  {path:'history/:type', component:HistoryBooksComponent},
+  {path:'horror/:type', component:HorrorBooksComponent},
+  {path:'viewproduct/:id', component:ViewProductComponent, canActivate:[sighnUpGuard]},
   {path:'viewrelatedprdct/:id', component:RelatedprdctViewComponent},
   {path:'add-to-cart', component:AddToCartComponent},
-  // {path:'collection/:type', component:CollectionsComponent},
   {path:'**', component:ErrorUrlComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

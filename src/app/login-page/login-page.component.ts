@@ -1,7 +1,7 @@
 import { Component,inject,ViewChild } from '@angular/core';
-import { UserSrvcService } from '../services/user-srvc.service';
+import { UserSrvcService } from '../core/services/user-srvc.service';
 import { NgForm } from '@angular/forms';
-import { logindetails } from '../models/login-model';
+import { logindetails } from '../core/models/login-model';
 
 @Component({
   selector: 'app-login-page',

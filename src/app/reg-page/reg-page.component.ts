@@ -1,6 +1,6 @@
 import { Component,ViewChild,inject,OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
-import { UserSrvcService } from '../services/user-srvc.service';
+import { UserSrvcService } from '../core/services/user-srvc.service';
 import { Router } from '@angular/router';
 
 
