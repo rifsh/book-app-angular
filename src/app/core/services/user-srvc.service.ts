@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { loginValuesModel } from '../models/user-reg-model';
 import { Router } from '@angular/router';
 import { logindetails } from '../models/login-model';
+import { AdminLoginData } from '../models/admin-login-model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,22 @@ export class UserSrvcService {
   showCart:boolean=false;
   isLogged:boolean = false;
   usrname:string;
+  adminLoginValues: AdminLoginData[] = [{
+    adminUsername: 'soman',adminPassword:'soman123'
+  }];
 
   constructor(private router: Router) {
     const localdata = localStorage.getItem('signUpUsers');
     if (localdata != null) {
       this.user = JSON.parse(localdata);
     }
+    localStorage.setItem('adminLoginValues', JSON.stringify(this.adminLoginValues));
   }
-  //signUpdatas: user[] = []
+  
   logindatas: object[] = [];
   user: loginValuesModel[] = [];
   userlogin: logindetails[] = [];
+  adminLoginValue: AdminLoginData [] = [];
 
   signUp() {
     localStorage.setItem('signUpUsers', JSON.stringify(this.user))
@@ -43,7 +49,18 @@ export class UserSrvcService {
       this.showCart = true;
       this.router.navigate(['all-products']);
       this.isLogged = true;
+    }  
+  }
+
+  adminLogin() {
+    const adminLoginContents = localStorage.getItem('adminLoginValues');
+    if (adminLoginContents != null) {
+      this.adminLoginValue  = JSON.parse(adminLoginContents);
     }
+    // if () {
+      
+    // }
+    
     
   }
   

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent {
+  constructor( private srvc: UserSrvcService ) {}
+
+  loginFunction() {
+    this.srvc.adminLogin();
+    
+  }
 
 }
