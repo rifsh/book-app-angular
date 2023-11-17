@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { loginValuesModel } from '../models/user-reg-model';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { logindetails } from '../models/login-model';
 import { AdminLoginData } from '../models/admin-login-model';
 
@@ -52,14 +52,19 @@ export class UserSrvcService {
     }  
   }
 
-  adminLogin() {
+  adminLogin(adminName: string, adminPassword: string) {
     const adminLoginContents = localStorage.getItem('adminLoginValues');
     if (adminLoginContents != null) {
       this.adminLoginValue  = JSON.parse(adminLoginContents);
     }
-    // if () {
-      
-    // }
+
+    const adminFind = this.adminLoginValue.filter((x)=>{return x.adminUsername === adminName && x.adminPassword === adminPassword })
+    
+    if ( adminFind.length === 0 || adminName === '' || adminName === '' ) {
+      alert('You are not real one');
+    }else {
+      this.router.navigate(['admin-landing']);
+    }
     
     
   }

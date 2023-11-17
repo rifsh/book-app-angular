@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { MatModule } from './mat-module/mat/mat.module';
 import { ProductsModuleModule } from './products-module/products-module.module';
 import { CoreModule } from './core/core.module';
+import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
@@ -26,9 +27,9 @@ import { CoreModule } from './core/core.module';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    ProductsModuleModule,
     MatModule,
-    CoreModule
+    CoreModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

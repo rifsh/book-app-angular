@@ -11,7 +11,7 @@ import { RelatedprdctViewComponent } from './products-module/relatedprdct-view/r
 import { ScfiBooksComponent } from './products-module/scfi-books/scfi-books.component';
 import { ViewProductComponent } from './products-module/view-product/view-product.component';
 import { RegPageComponent } from './reg-page/reg-page.component';
-import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path:'home', loadChildren:()=> import('./core/core.module').then(m=>m.CoreModule)},
@@ -26,7 +26,8 @@ const routes: Routes = [
   {path:'viewproduct/:id', component:ViewProductComponent, canActivate:[sighnUpGuard]},
   {path:'viewrelatedprdct/:id', component:RelatedprdctViewComponent},
   {path:'add-to-cart', component:AddToCartComponent},
-  {path:'admin-login', component:AdminLoginComponent},
+  {path:'admin-login', loadChildren:()=> import('./admin/admin.module').then(m=>m.AdminModule)},
+  {path:'admin-dashboard', component:DashboardComponent},
   {path:'**', component:ErrorUrlComponent},
 ];
 

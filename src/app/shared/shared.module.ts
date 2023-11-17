@@ -11,6 +11,7 @@ import { AllProdutsComponent } from '../products-module/all-produts/all-produts.
 import { ProductsModuleModule } from '../products-module/products-module.module';
 import { AddToCartComponent } from '../products-module/add-to-cart/add-to-cart.component';
 import { ViewProductComponent } from '../products-module/view-product/view-product.component';
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 
 // import { ModuleModule } from '../mat-module/module/module.module';
 
@@ -20,7 +21,9 @@ import { ViewProductComponent } from '../products-module/view-product/view-produ
   declarations: [
     ProductsListComponent,
     NavBarComponent,
+    AdminNavbarComponent,
     FooterComponent,
+    AdminNavbarComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { ViewProductComponent } from '../products-module/view-product/view-produ
     ProductsListComponent,
     NavBarComponent,
     FooterComponent,
+    AdminNavbarComponent
   ]
 })
 export class SharedModule { }
