@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { MatModule } from './mat-module/mat/mat.module';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -28,7 +29,12 @@ import { AdminModule } from './admin/admin.module';
     SharedModule,
     MatModule,
     CoreModule,
-    AdminModule
+    AdminModule,
+    ToastrModule.forRoot(
+      {
+        timeOut:2000,
+      }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

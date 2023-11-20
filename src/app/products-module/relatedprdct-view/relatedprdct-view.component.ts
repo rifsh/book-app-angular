@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from '../../core/models/allproducts.model';
 import { ActivatedRoute } from '@angular/router';
-import { FilterService } from '../../core/services/filter.service';
 import { UserSrvcService } from '../../core/services/user-srvc.service';
+import { FilterService } from 'src/app/core/services/filter.service';
 
 @Component({
   selector: 'app-relatedprdct-view',

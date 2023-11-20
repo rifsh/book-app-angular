@@ -3,6 +3,7 @@ import { loginValueModel } from '../models/user-reg-model';
 import { Router, RouterLink } from '@angular/router';
 import { logindetail } from '../models/login-model';
 import { AdminLoginData } from '../models/admin-login-model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,10 @@ export class UserSrvcService {
 
 
   adminLoginValues: AdminLoginData[] = [{
-    adminUsername: 'soman',adminPassword:'soman123'
+    adminUsername: 'rifash',adminPassword:'1122'
   }];
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private toast:ToastrService) {
     const localdata = localStorage.getItem('signUpUsers');
     if (localdata != null) {
       this.user = JSON.parse(localdata);
@@ -49,9 +50,9 @@ export class UserSrvcService {
     
     if (findedUser.length === 0  || loginarr.password ==='' && loginarr.userName === '') {
       this.showCart = false;
-      alert("You are not authorized")
+      this.toast.error('Not Authorized')
     }else {
-      alert('you are authorized');
+      this.toast.success("Log in Success");
       this.usrname = usrName;
       this.showCart = true;
       this.router.navigate(['all-products']);
@@ -67,13 +68,15 @@ export class UserSrvcService {
     }
 
     const adminFind = this.adminLoginValue.filter((x)=>{return x.adminUsername === adminName && x.adminPassword === adminPassword })
+    // console.log(adminName);
     
     if ( adminFind.length === 0 || adminName === '' || adminName === '' ) {
-      alert('You are not real one');
+      this.toast.error('You are not the real one')
       this.router.navigate(['admin-login']);
     }else {
       this.adminName = adminFind[0].adminUsername;
       this.router.navigate(['admin-dashboard']);
+      this.toast.success('Admin Accessed')
     }
     
     

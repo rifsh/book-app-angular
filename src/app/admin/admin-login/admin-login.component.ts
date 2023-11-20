@@ -9,11 +9,11 @@ import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent {
-  constructor( private srvc: UserSrvcService,private route:Router ) {}
+  constructor( private srvc: UserSrvcService) {}
   @ViewChild('adminLoginForm') loginForm: NgForm;
 
 
-  loginFunction() {
+  loginFunction() {    
     this.srvc.adminLogin(this.loginForm.value.userName,this.loginForm.value.password);
   }
 

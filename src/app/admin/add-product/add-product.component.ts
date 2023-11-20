@@ -12,9 +12,11 @@ import { UserProductsService } from 'src/app/core/services/user-products.service
 export class AddProductComponent {
 
   pushProducts:ProductModel [] = [];
+  prdctId:number = this.productSrvc.allProductsSrvc.length+1;
   @ViewChild('prdctForm') formValues:NgForm; 
 
-  constructor(private srvc:AdminSrvcService) {
+  constructor(private srvc:AdminSrvcService, private productSrvc: UserProductsService) {
+    console.log(this.prdctId);
     
   }
   
