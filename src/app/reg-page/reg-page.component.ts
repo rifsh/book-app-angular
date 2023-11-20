@@ -36,4 +36,8 @@ onFormSubmitted() {
   })
 }
 
+removeUserds() {
+  this.srvc.emptyStorage();
+}
+
 }

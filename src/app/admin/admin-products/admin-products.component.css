@@ -1,0 +1,21 @@
+.user-main {
+    padding: 30px;
+}
+
+table th {
+    text-align: center;
+}
+
+
+table,
+th,
+td {
+    border: 2px solid black;
+    min-width: 120px;
+    text-align: start;
+}
+
+img {
+    width: 100%;
+    padding: 10px;
+}

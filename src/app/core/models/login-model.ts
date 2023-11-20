@@ -1,4 +1,4 @@
-export class logindetails {
+export class logindetail {
     userName:'';
     password: '';
 }

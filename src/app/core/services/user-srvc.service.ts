@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { loginValuesModel } from '../models/user-reg-model';
+import { loginValueModel } from '../models/user-reg-model';
 import { Router, RouterLink } from '@angular/router';
-import { logindetails } from '../models/login-model';
+import { logindetail } from '../models/login-model';
 import { AdminLoginData } from '../models/admin-login-model';
 
 @Injectable({
@@ -13,6 +13,9 @@ export class UserSrvcService {
   showCart:boolean=false;
   isLogged:boolean = false;
   usrname:string;
+  adminName:string;
+
+
   adminLoginValues: AdminLoginData[] = [{
     adminUsername: 'soman',adminPassword:'soman123'
   }];
@@ -26,8 +29,8 @@ export class UserSrvcService {
   }
   
   logindatas: object[] = [];
-  user: loginValuesModel[] = [];
-  userlogin: logindetails[] = [];
+  user: loginValueModel[] = [];
+  userlogin: logindetail[] = [];
   adminLoginValue: AdminLoginData [] = [];
 
   signUp() {
@@ -35,7 +38,11 @@ export class UserSrvcService {
     this.router.navigate(['login']);
   }
 
-  login(usrName:string,password:string, loginarr:logindetails) {
+  emptyStorage() {
+    localStorage.removeItem('signUpUsers');
+  }
+
+  login(usrName:string,password:string, loginarr:logindetail) {
     let findedUser = this.user.filter((x)=>{
       return x.regName === usrName && x.regPassword === password
     })
@@ -53,6 +60,7 @@ export class UserSrvcService {
   }
 
   adminLogin(adminName: string, adminPassword: string) {
+    
     const adminLoginContents = localStorage.getItem('adminLoginValues');
     if (adminLoginContents != null) {
       this.adminLoginValue  = JSON.parse(adminLoginContents);
@@ -62,8 +70,10 @@ export class UserSrvcService {
     
     if ( adminFind.length === 0 || adminName === '' || adminName === '' ) {
       alert('You are not real one');
+      this.router.navigate(['admin-login']);
     }else {
-      this.router.navigate(['admin-landing']);
+      this.adminName = adminFind[0].adminUsername;
+      this.router.navigate(['admin-dashboard']);
     }
     
     

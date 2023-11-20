@@ -1,0 +1,16 @@
+<div class="main" style="display: flex; flex: 1;">
+    <app-admin-navbar></app-admin-navbar>
+    <div class="user-main">
+        <h4>Users</h4>
+        <table>
+            <tr>
+                <th>User name</th>
+                <th>Email</th>
+            </tr>
+            <tr *ngFor="let i of users">
+                <td>{{i.regName}}</td>
+                <td>{{i.regEmail}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

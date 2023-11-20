@@ -1,5 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
   styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent {
-  constructor( private srvc: UserSrvcService ) {}
+  constructor( private srvc: UserSrvcService,private route:Router ) {}
   @ViewChild('adminLoginForm') loginForm: NgForm;
 
 

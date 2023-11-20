@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { MatModule } from './mat-module/mat/mat.module';
-import { ProductsModuleModule } from './products-module/products-module.module';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
 

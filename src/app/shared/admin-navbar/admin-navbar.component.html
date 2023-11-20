@@ -9,15 +9,17 @@
     <mat-sidenav-container>
         <mat-sidenav #sidenav opened="false" mode="side">
             <mat-nav-list>
-                <a mat-list-item routerLink="/admin-dashboard">Home</a>
-                <a mat-list-item>Dashboard</a>
-                <a mat-list-item>Users</a>
-                <a mat-list-item>Products</a>
+                <a mat-list-item routerLink="/admin-dashboard">Dashboard</a>
+                <a mat-list-item routerLink="/admin-users">Users</a>
+                <a mat-list-item routerLink="/admin-products">Products</a>
+                <a mat-list-item routerLink="/add-product">Add products</a>
             </mat-nav-list>
+            <a style="text-decoration: none; color: black;" routerLink="/login">Back to Login page</a>
         </mat-sidenav>
         <mat-sidenav-content>
             <div >
                 <router-outlet></router-outlet>
+                <!-- <h1>hello</h1> -->
             </div>
         </mat-sidenav-content>
     </mat-sidenav-container>

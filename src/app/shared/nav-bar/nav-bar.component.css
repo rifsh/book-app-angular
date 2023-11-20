@@ -1,11 +1,7 @@
 .container-fluid img{
     width: 100%;
 }
-/* nav {
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-} */
+
 .dropdown-menu li {
     transition: transform 0.5s;
 }

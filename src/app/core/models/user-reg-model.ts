@@ -1,4 +1,4 @@
-export class loginValuesModel {
+export class loginValueModel {
     regName:'';
     regEmail:'';
     regPassword: '';

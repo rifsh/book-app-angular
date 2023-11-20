@@ -16,7 +16,6 @@ export class NavBarComponent {
   logLinkShow: boolean;
   logoutLinkShow: boolean;
   drpdownValue: string = 'Collections';
-  selected = 'option2';
   searchValue: string;
   searchedArray: ProductModel[] = [];
   cartCount: number;

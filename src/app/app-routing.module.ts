@@ -12,6 +12,11 @@ import { ScfiBooksComponent } from './products-module/scfi-books/scfi-books.comp
 import { ViewProductComponent } from './products-module/view-product/view-product.component';
 import { RegPageComponent } from './reg-page/reg-page.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { EditProductComponent } from './admin/edit-product/edit-product.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { EditPrdctComponent } from './admin/edit-prdct/edit-prdct.component';
 
 const routes: Routes = [
   {path:'home', loadChildren:()=> import('./core/core.module').then(m=>m.CoreModule)},
@@ -28,6 +33,11 @@ const routes: Routes = [
   {path:'add-to-cart', component:AddToCartComponent},
   {path:'admin-login', loadChildren:()=> import('./admin/admin.module').then(m=>m.AdminModule)},
   {path:'admin-dashboard', component:DashboardComponent},
+  {path:'admin-users', component:AdminUsersComponent},
+  {path:'admin-products', component:AdminProductsComponent},
+  {path:'admin-edit', component:EditProductComponent},
+  {path:'add-product', component:AddProductComponent},
+  {path:'edit-product/:id', component:EditPrdctComponent},
   {path:'**', component:ErrorUrlComponent},
 ];
 

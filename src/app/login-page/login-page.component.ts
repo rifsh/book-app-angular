@@ -1,7 +1,7 @@
 import { Component,inject,ViewChild } from '@angular/core';
 import { UserSrvcService } from '../core/services/user-srvc.service';
 import { NgForm } from '@angular/forms';
-import { logindetails } from '../core/models/login-model';
+import { logindetail } from '../core/models/login-model';
 
 @Component({
   selector: 'app-login-page',
@@ -10,7 +10,7 @@ import { logindetails } from '../core/models/login-model';
 })
 export class LoginPageComponent {
 
-  loginarr:logindetails[]=[]
+  loginarr:logindetail[]=[]
 
   srvc:UserSrvcService = inject(UserSrvcService);
 

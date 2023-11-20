@@ -7,6 +7,7 @@ import { UserSrvcService } from './services/user-srvc.service';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ErrorUrlComponent } from './error-url/error-url.component';
 import { SharedModule } from '../shared/shared.module';
+import { AdminSrvcService } from './services/admin-srvc.service';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
   providers:[
     UserProductsService,
     UserSrvcService,
-    FilterService
+    FilterService,
+    AdminSrvcService
   ]
 })
 export class CoreModule { }
