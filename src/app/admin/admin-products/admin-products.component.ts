@@ -19,8 +19,7 @@ export class AdminProductsComponent {
     this.adminSrvc.removeProducts(id)
   }
 
-  editProduct() {
-    this.adminSrvc.editPrdct();
-  }
+  // editProduct() {
+  // }
 
 }

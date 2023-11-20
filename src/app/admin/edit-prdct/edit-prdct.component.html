@@ -9,6 +9,13 @@
           (ngSubmit)="editPrdct()">
   
           <div class="inputs">
+            <label for="">Product Id: </label>
+            <mat-form-field>
+              <mat-label>Product Id</mat-label>
+              <input readonly="true" type="number" matInput required name="id" ngModel>
+            </mat-form-field>
+          </div>
+          <div class="inputs">
             <label for="">Product Title: </label>
             <mat-form-field>
               <mat-label>Product Title</mat-label>

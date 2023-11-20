@@ -27,7 +27,7 @@
                     <button (click)="removeProducts(i.id)" mat-raised-button color="warn">Remove</button>
                 </td>
                 <td style="text-align: center;">
-                    <button mat-flat-button (click)="editProduct()" [routerLink]="'/edit-product/'+(i.id)">Edit</button>
+                    <button mat-flat-button [routerLink]="'/edit-product/'+(i.id)">Edit</button>
                 </td>
             </tr>
         </table>

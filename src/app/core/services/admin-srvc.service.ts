@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { UserProductsService } from './user-products.service';
 import { NgForm } from '@angular/forms';
+import { ProductModel } from '../models/allproducts.model';
+import { AllProdutsComponent } from 'src/app/products-module/all-produts/all-produts.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +25,17 @@ export class AdminSrvcService {
 
   addProducts(formValues: NgForm) {
     this.srvc.allProductsSrvc.push(formValues.value);
+    console.log(this.srvc.allProductsSrvc);
+    
   }
 
-  editPrdct(id?:number) {
-    // setTimeout(() => {
-    //   console.log(this.editForm);
-      
-    // }, 3000);
+  editPrdct(product:ProductModel,formValue:ProductModel) {
+    
+    let index = this.srvc.allProductsSrvc.findIndex((x)=>{return x.id === product.id});
+    this.srvc.allProductsSrvc[index] = formValue;
+    
+    
+    
   }
 
 }

@@ -14,7 +14,7 @@ export class EditPrdctComponent implements OnInit{
 
   @ViewChild('editprdctForm') editForm:NgForm;
 
-  prdcts: ProductModel [] = [];
+  prdcts: ProductModel;
 
   constructor(private srvc:AdminSrvcService, private routerValue: ActivatedRoute,private prdctSrvc: UserProductsService) {
     
@@ -26,11 +26,12 @@ export class EditPrdctComponent implements OnInit{
     let product = this.prdctSrvc.allProductsSrvc.find((x)=>{
       return  x.id === Number(prdctId)
     })
-    this.prdcts.push(product)
+    this.prdcts = product;
     this.srvc.editForm = this.editForm;
     
     setTimeout(() => {
       this.editForm.setValue ({
+        id: product.id,
         title: product.title,
         author: product.author,
         image: product.image,
@@ -42,9 +43,8 @@ export class EditPrdctComponent implements OnInit{
   }
   
   editPrdct() {
-    console.log(this.prdcts.filter((x)=>{
-      return x.title = 'llll'
-    }));
+    
+    this.srvc.editPrdct(this.prdcts,this.editForm.value );
     
   }
 }
