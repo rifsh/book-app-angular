@@ -8,3 +8,8 @@ export class ProductModel {
     price:number;
     quandity?:number = 1;
 }
+
+export class ResponseProduct {
+    totalProducts: number;
+    datas;
+}

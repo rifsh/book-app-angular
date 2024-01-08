@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductModel } from 'src/app/core/models/allproducts.model';
+import { ProductModel, ResponseProduct } from 'src/app/core/models/allproducts.model';
 import { AdminSrvcService } from 'src/app/core/services/admin-srvc.service';
 import { UserProductsService } from 'src/app/core/services/user-products.service';
 
@@ -12,7 +12,12 @@ import { UserProductsService } from 'src/app/core/services/user-products.service
 export class AdminProductsComponent {
   allProdutcs: ProductModel [] = [];
   constructor(private srvc: UserProductsService, private adminSrvc: AdminSrvcService, private route: Router) {
-    this.allProdutcs = srvc.allProductsSrvc;
+    adminSrvc.getProducts().subscribe((res: ResponseProduct)=>{
+      this.allProdutcs = res.datas;
+    },(err)=>{
+      console.log(err);
+    });
+    // this.allProdutcs = srvc.allProductsSrvc;
   }
 
   removeProducts(id:number) {

@@ -11,9 +11,11 @@ import { AdminProductsComponent } from './admin-products/admin-products.componen
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditPrdctComponent } from './edit-prdct/edit-prdct.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminInterceptorInterceptor } from 'src/Interceptors/admin-interceptor.interceptor';
 
-const routes:Routes = [
-  {path:'', component:AdminLoginComponent},
+const routes: Routes = [
+  { path: '', component: AdminLoginComponent },
 ]
 
 @NgModule({
@@ -32,6 +34,6 @@ const routes:Routes = [
     RouterModule.forChild(routes),
     MatModule,
     SharedModule
-  ]
+  ],
 })
 export class AdminModule { }

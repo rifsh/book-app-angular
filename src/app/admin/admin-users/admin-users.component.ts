@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { logindetail } from 'src/app/core/models/login-model';
-import { loginValueModel } from 'src/app/core/models/user-reg-model';
+import { LoginValueModel, MainUser, userDetails } from 'src/app/core/models/user-reg-model';
 import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
 
 @Component({
@@ -10,10 +10,17 @@ import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
 })
 export class AdminUsersComponent {
 
-  users: loginValueModel[] = [];
-
-  constructor(private srvc:UserSrvcService) {
-    this.users = srvc.user;
+  // users: LoginValueModel[] = [];
+  userlow: MainUser[] = [];
+  
+  constructor(private srvc: UserSrvcService) {
+    srvc.allUsers().subscribe((res: userDetails) => {
+      console.log(res.datas);
+      this.userlow = res.datas;
+    }, (err) => {
+      console.log(err.message);
+    });
+    // this.users = srvc.user;
   }
 
 }

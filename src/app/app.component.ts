@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { UserSrvcService } from './core/services/user-srvc.service';
+import mongoose from 'mongoose';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { UserSrvcService } from './core/services/user-srvc.service';
 export class AppComponent implements OnInit{
   title = 'book-app';
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

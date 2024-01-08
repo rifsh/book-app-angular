@@ -12,6 +12,8 @@ import { MatModule } from './mat-module/mat/mat.module';
 import { CoreModule } from './core/core.module';
 import { AdminModule } from './admin/admin.module';
 import { ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminInterceptorInterceptor } from 'src/Interceptors/admin-interceptor.interceptor';
 
 
 @NgModule({
@@ -32,11 +34,13 @@ import { ToastrModule } from 'ngx-toastr';
     AdminModule,
     ToastrModule.forRoot(
       {
-        timeOut:2000,
+        timeOut: 2000,
       }
     )
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AdminInterceptorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

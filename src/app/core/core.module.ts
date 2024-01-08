@@ -8,6 +8,7 @@ import { ErrorUrlComponent } from './error-url/error-url.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminSrvcService } from './services/admin-srvc.service';
 import { FilterService } from './services/filter.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule.forChild(routes),
     SharedModule
 

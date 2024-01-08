@@ -1,6 +1,6 @@
 import { Component,OnInit,ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from 'src/app/core/models/allproducts.model';
 import { AdminSrvcService } from 'src/app/core/services/admin-srvc.service';
 import { UserProductsService } from 'src/app/core/services/user-products.service';
@@ -16,7 +16,7 @@ export class EditPrdctComponent implements OnInit{
 
   prdcts: ProductModel;
 
-  constructor(private srvc:AdminSrvcService, private routerValue: ActivatedRoute,private prdctSrvc: UserProductsService) {
+  constructor(private srvc:AdminSrvcService, private routerValue: ActivatedRoute,private prdctSrvc: UserProductsService,private route:Router) {
     
     
   }
@@ -45,6 +45,7 @@ export class EditPrdctComponent implements OnInit{
   editPrdct() {
     
     this.srvc.editPrdct(this.prdcts,this.editForm.value );
+    this.route.navigate(['admin-products'])
     
   }
 }
