@@ -1,10 +1,13 @@
 import { Injectable, inject } from '@angular/core';
-import { LoginValueModel } from '../models/user-reg-model';
+import { LoginValueModel, UserDetails, UserLoginVallues } from '../models/user-reg-model';
 import { Router, RouterLink } from '@angular/router';
-import { logindetail } from '../models/login-model';
+import { LoginDetail, LoginResponse } from '../models/login-model';
 import { AdminLoginData, adminLoginRes, adminlogin } from '../models/admin-login-model';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { json } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,7 @@ export class UserSrvcService {
   showCart: boolean = false;
   isLogged: boolean = false;
   usrname: string;
-  adminName: string;
+  adminname: string;
 
 
   adminLoginValues: AdminLoginData[] = [{
@@ -35,41 +38,46 @@ export class UserSrvcService {
 
   logindatas: object[] = [];
   user: LoginValueModel[] = [];
-  userlogin: logindetail[] = [];
+  userlogin: LoginDetail[] = [];
   adminLoginValue: AdminLoginData[] = [];
+  userId: string = ''
 
-  signUp() {
-    localStorage.setItem('signUpUsers', JSON.stringify(this.user))
-    this.router.navigate(['login']);
+  signUp(formValue: NgForm, file: File) {
+    const formData = new FormData();
+    formData.append('name', formValue.value.regName);
+    formData.append('profileImg', file);
+    formData.append('usrname', formValue.value.regusername);
+    formData.append('email', formValue.value.regEmail);
+    formData.append('password', formValue.value.regPassword);
+    formData.append('confirmPassword', formValue.value.regrePassword);
+    return this.http.post('http://localhost:3000/api/users/signup', formData)
   }
 
   emptyStorage() {
     localStorage.removeItem('signUpUsers');
   }
 
-  login(usrName: string, password: string, loginarr: logindetail) {
-    let findedUser = this.user.filter((x) => {
-      return x.regName === usrName && x.regPassword === password
-    })
+  login(userValues: UserLoginVallues) {
 
-    if (findedUser.length === 0 || loginarr.password === '' && loginarr.userName === '') {
+    this.http.post('http://localhost:3000/api/users/login', userValues).subscribe((res: LoginResponse) => {
+      if (res.status === "Valid") {
+        this.userId = res.user._id;
+        this.usrname = res.user.name;
+        localStorage.setItem('userToken', res.token);
+        this.toast.success("Log in Success");
+        this.router.navigate(['all-products']);
+      }
+    }, (err) => {
       this.showCart = false;
       this.toast.error('Not Authorized')
-    } else {
-      this.toast.success("Log in Success");
-      this.usrname = usrName;
-      this.showCart = true;
-      this.router.navigate(['all-products']);
-      this.isLogged = true;
-    }
+    })
   }
 
-  allUsers() {
+  allUsers(): Observable<object> {
     return this.http.get('http://localhost:3000/api/admin/users')
   }
 
   adminLogin(adminName: string, adminPassword: string) {
-    let token: string;
     let values: adminlogin = {
       username: adminName,
       password: adminPassword
@@ -79,32 +87,15 @@ export class UserSrvcService {
     })
     this.http.post('http://localhost:3000/api/admin/login', values).subscribe((res: adminLoginRes) => {
       if (res.token) {
+        this.adminname = res.name;
         localStorage.setItem('token', res.token);
-        this.toast.success('Admin Accessed')
+        this.toast.success('Admin Accessed');
         this.router.navigate(['admin-dashboard']);
-        console.log(res.message);
       } else {
       }
     }, (err) => {
       this.toast.error('You are not the real one')
     })
-
-    const adminLoginContents = localStorage.getItem('adminLoginValues');
-    // if (adminLoginContents != null) {
-    //   this.adminLoginValue = JSON.parse(adminLoginContents);
-    // }
-
-    // const adminFind = this.adminLoginValue.filter((x) => { return x.adminUsername === adminName && x.adminPassword === adminPassword })
-    // // console.log(adminName);
-
-    // if (adminFind.length === 0 || adminName === '' || adminName === '') {
-    //   this.toast.error('You are not the real one')
-    //   this.router.navigate(['admin-login']);
-    // } else {
-    //   this.adminName = adminFind[0].adminUsername;
-    //   this.toast.success('Admin Accessed')
-    // }
-
 
   }
 

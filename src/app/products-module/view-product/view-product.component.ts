@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductModel } from 'src/app/core/models/allproducts.model';
-import { FilterService } from 'src/app/core/services/filter.service';
+import { ResponseProduct, ResponseProductView } from 'src/app/core/models/allproducts.model';
+import { UserProductsService } from 'src/app/core/services/user-products.service';
 import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
 
 @Component({
@@ -10,24 +10,33 @@ import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
   styleUrls: ['./view-product.component.css']
 })
 export class ViewProductComponent {
-  productsView: ProductModel[] = [];
-  relatedProduct: ProductModel[] = [];
+  productsView: ResponseProductView[] = [];
+  horrorBooks: ResponseProductView[] = [];
+  relatedProduct: ResponseProductView[] = [];
+
   type: string;
   cartIncerment: number = 0;
 
 
-  constructor(private activateRoute: ActivatedRoute, private srvc: FilterService, private srvcUser: UserSrvcService ) { }
+  constructor(private activateRoute: ActivatedRoute, private srvc: UserProductsService, private srvcUser: UserSrvcService) { 
+    srvcUser.showSearchBox = false;
+  }
 
   ngOnInit(): void {
-    let routeparam = this.activateRoute.snapshot.paramMap.get("id");
-    this.srvc.viewProducts(parseInt(routeparam));
-    this.productsView = this.srvc.findedProductView;
-    this.relatedProduct = this.srvc.relaPrdct;
-    this.srvcUser.showSearchBox = false;
+    let productId: string;
+    let routeParam: string = this.activateRoute.snapshot.paramMap.get("id");
+    let categoryParam: string = this.activateRoute.snapshot.paramMap.get("category");
+    this.srvc.viewProducts(routeParam).subscribe((resm: ResponseProduct) => {
+      this.productsView.push(resm.datas);
+      this.srvc.fleteringProductsAction(categoryParam).subscribe((res: ResponseProduct) => {
+        this.relatedProduct = res.datas;
+        this.relatedProduct = this.relatedProduct.filter((x) => { return x._id != resm.id });
+      })
+    });
     this.cartIncerment = this.srvc.cartIconCount;
   }
-  
-  addToCart(prdctid: number) {
+
+  addToCart(prdctid: string) {
     this.srvc.CartFunction(prdctid);
     this.cartIncerment = this.srvc.cartIconCount
   }

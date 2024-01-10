@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { UserProductsService } from './user-products.service';
 import { NgForm } from '@angular/forms';
-import { ProductModel } from '../models/allproducts.model';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,39 +15,41 @@ export class AdminSrvcService {
 
   constructor(private srvc: UserProductsService, private toast: ToastrService) { }
 
-  removeProducts(prdctId: number) {
-
-    const productFind = this.srvc.allProductsSrvc.find((x) => {
-      return x.id === prdctId;
-    })
-    let indexValue = this.srvc.allProductsSrvc.indexOf(productFind);
-    this.srvc.allProductsSrvc.splice(indexValue, 1);
-
-  }
 
   getProducts() {
     return this.http.get('http://localhost:3000/api/admin/products')
   }
 
-  addProducts(formValues: NgForm, file: File) {
-    const formImg = new FormData(document.getElementById("prdctf") as HTMLFormElement);
+  addProducts(formValues: NgForm, file: File): Observable<object> {
+    const formImg = new FormData();
+    formImg.append('title', formValues.value.title);
     formImg.append('image', file);
+    formImg.append('description', formValues.value.description);
+    formImg.append('category', formValues.value.category);
+    formImg.append('author', formValues.value.author);
+    formImg.append('price', formValues.value.price);
 
-    const headers = new HttpHeaders();
-    headers.set('Content-Type', 'multipart/form-data; boundary=<calculated when request is sent>')
-    this.http.post('http://localhost:3000/api/admin/addproducts', formImg).subscribe((res) => {
-      console.log(res);
-    }, (err) => {
-      console.log(err);
-    })
-    // this.srvc.allProductsSrvc.push(formValues.value);
+    return this.http.post('http://localhost:3000/api/admin/addproducts', formImg)
   }
 
-  editPrdct(product: ProductModel, formValue: ProductModel) {
+  removeProducts(prdctId: string): Observable<object> {
+    return this.http.delete(`http://localhost:3000/api/admin/deleteproduct/${prdctId}`)
+  }
 
-    let index = this.srvc.allProductsSrvc.findIndex((x) => { return x.id === product.id });
-    this.srvc.allProductsSrvc[index] = formValue;
-    this.toast.success('Product Upadted');
+  singleProduct(id: string): Observable<object> {
+    return this.http.get(`http://localhost:3000/api/admin/productbyid/${id}`)
+  }
+
+  editPrdct(id: string, file: File, formValues: NgForm): Observable<object> {
+    let formDatas = new FormData();
+    formDatas.append('title', formValues.value.title);
+    formDatas.append('image', file);
+    formDatas.append('description', formValues.value.description);
+    formDatas.append('category', formValues.value.category);
+    formDatas.append('author', formValues.value.author);
+    formDatas.append('price', formValues.value.price);
+
+    return this.http.patch(`http://localhost:3000/api/admin/updateproduct/${id}`, formDatas);
   }
 
 }

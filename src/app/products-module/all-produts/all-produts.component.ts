@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductModel } from 'src/app/core/models/allproducts.model';
+import { ProductModel, ResponseProduct, ResponseProductView } from 'src/app/core/models/allproducts.model';
 import { FilterService } from 'src/app/core/services/filter.service';
 import { UserProductsService } from 'src/app/core/services/user-products.service';
 import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
@@ -12,11 +12,11 @@ import { UserSrvcService } from 'src/app/core/services/user-srvc.service';
 })
 export class AllProdutsComponent {
   prdctCondition: boolean = true;
-  allProducts: ProductModel[] = [];
+  allProducts: ResponseProductView[] = [];
   searchValue: string = '';
-  searchedArray: ProductModel[] = [];
-  cartIincrement:number;
-  constructor(private srvc: UserProductsService, private usrsrvc: UserSrvcService, private activateRoute: ActivatedRoute, private filterSrvc: FilterService) {
+  searchedArray: ResponseProductView[] = [];
+  cartIincrement: number;
+  constructor(private srvc: UserProductsService, private usrsrvc: UserSrvcService, private activateRoute: ActivatedRoute, private filterSrvc: UserProductsService) {
 
   }
 
@@ -26,14 +26,16 @@ export class AllProdutsComponent {
     if (this.usrsrvc.isLogged) {
       this.usrsrvc.showCart = true;
     }
-    this.allProducts = this.srvc.allProductsSrvc;
+    this.srvc.getProducts().subscribe((res: ResponseProduct) => {
+      this.allProducts = res.datas
+      
+    })
     this.cartIincrement = this.filterSrvc.cartIconCount;
   }
 
   changeSearch(searchContent: string) {
 
     this.searchValue = searchContent;
-
     this.searchedArray = this.allProducts.filter((x) => { return x.title.toLowerCase().includes(this.searchValue.toLowerCase()) });
 
     if (this.searchValue.length === 0) {
@@ -41,7 +43,5 @@ export class AllProdutsComponent {
     } else {
       this.prdctCondition = false;
     }
-
-
   }
 }

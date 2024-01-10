@@ -28,7 +28,7 @@
             
             <div class="card me-5 mt-5 cards card-img" style="width: 17rem;" *ngFor="let i of searchedArray ">
                 <div >
-                    <a [routerLink]="'/viewproduct/'+(i.id)">
+                    <a [routerLink]="'/viewproduct/'+(i._id)">
                         <img class="card-img-top w-100" [src]="i.image" alt="Card image cap">
                     </a>
                     <div class="card-body">

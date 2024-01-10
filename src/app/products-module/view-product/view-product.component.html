@@ -11,10 +11,10 @@
                     <!-- <span class="text-decoration-line-through">{{i.price | currency:'INR'}}</span> -->
                     <span>{{i.price | currency:'INR'}}</span>
                 </div>
-                <p class="lead">{{i.dessc}}</p>
+                <p class="lead">{{i.description}}</p>
                 <div class="d-flex">
                     <!-- <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" /> -->
-                    <button class="btn btn-outline-dark flex-shrink-0" (click)="addToCart(i.id)" type="button">
+                    <button class="btn btn-outline-dark flex-shrink-0" (click)="addToCart(i._id)" type="button">
                         <i class="bi-cart-fill me-1"></i>
                         Add to cart
                     </button>
@@ -31,7 +31,7 @@
             <div class="col mb-5" *ngFor="let i of relatedProduct">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <a [routerLink]="'/viewrelatedprdct/'+(i.id)">
+                    <a [routerLink]="'/viewrelatedprdct/'+(i._id)+'/'+(i.category)">
                         <img class="card-img-top" [src]="i.image" alt="..." />
                     </a>
                     <!-- Product details-->

@@ -12,7 +12,6 @@ export class FilterService implements OnInit {
   findedProductView: ProductModel[] = [];
   relaPrdct: ProductModel[] = [];
   cartPrdcts: ProductModel[] = [];
-  cartIconCount: number = 0;
   allBooks: ProductModel[] = [];
 
   constructor(private srvc: UserProductsService, private toast: ToastrService) { }
@@ -42,20 +41,7 @@ export class FilterService implements OnInit {
     this.relaPrdct = relatedPrdctFind;
   }
 
-  CartFunction(cartId?: number) {
-    let cartFind = this.srvc.allProductsSrvc.find((x) => {
-      return x.id === cartId;
-    })
-    let cartInP = this.cartPrdcts.find(x => x.id === cartId)
-    if (!cartInP) {
-      this.cartPrdcts.push(cartFind);
-
-      this.cartIconCount++;
-
-    } else {
-      this.toast.error('Product already exist')
-    }
-  }
+  
 
 
 }

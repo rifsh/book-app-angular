@@ -7,14 +7,7 @@
         <h3>Create products</h3>
         <form action="" style="display: flex; flex-direction: column; justify-content: space-between;" #editprdctForm="ngForm"
           (ngSubmit)="editPrdct()">
-  
-          <div class="inputs">
-            <label for="">Product Id: </label>
-            <mat-form-field>
-              <mat-label>Product Id</mat-label>
-              <input readonly="true" type="number" matInput required name="id" ngModel>
-            </mat-form-field>
-          </div>
+
           <div class="inputs">
             <label for="">Product Title: </label>
             <mat-form-field>
@@ -32,18 +25,15 @@
           </div>
   
           <div class="inputs">
-            <label for="">Product Image</label>
-            <mat-form-field>
-              <mat-label>Product Image</mat-label>
-              <input type="text" matInput required name="image" ngModel>
-            </mat-form-field>
-          </div>
+          <label for="">Product Image</label>
+            <input type="file" required name="image" ngModel (change)="selectImage($event)">
+        </div>
   
           <div class="inputs">
             <label for="">Product Description</label>
             <mat-form-field>
               <mat-label>Product Description</mat-label>
-              <input type="text" matInput name="dessc" ngModel>
+              <input type="text" matInput name="description" ngModel>
             </mat-form-field>
           </div>
   
@@ -51,7 +41,7 @@
             <label for="">Product Type</label>
             <mat-form-field>
               <mat-label>Product Type</mat-label>
-              <input type="text" matInput required name="type" ngModel>
+              <input type="text" matInput required name="category" ngModel>
             </mat-form-field>
           </div>
   

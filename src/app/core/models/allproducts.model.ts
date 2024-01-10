@@ -8,8 +8,17 @@ export class ProductModel {
     price:number;
     quandity?:number = 1;
 }
-
+export class ResponseProductView {
+    _id:string;
+    image:string;
+    title:string;
+    author:string;
+    category:string;
+    description:string;
+    price:number;
+}
 export class ResponseProduct {
-    totalProducts: number;
+    id?: string;
+    totalProducts?: number;
     datas;
 }

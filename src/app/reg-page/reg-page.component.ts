@@ -1,4 +1,4 @@
-import { Component,ViewChild,inject,OnInit } from '@angular/core';
+import { Component, ViewChild, inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { UserSrvcService } from '../core/services/user-srvc.service';
 import { Router } from '@angular/router';
@@ -10,34 +10,48 @@ import { Router } from '@angular/router';
   styleUrls: ['./reg-page.component.css']
 })
 export class RegPageComponent implements OnInit {
-  
-hide:boolean=true;
-srvc:UserSrvcService = inject(UserSrvcService);
-route:Router = inject(Router);
 
-@ViewChild('regForm') regForm:NgForm;
+  hide: boolean = true;
+  srvc: UserSrvcService = inject(UserSrvcService);
+  route: Router = inject(Router);
 
-
-constructor(private router: Router) { }
-
-ngOnInit(): void {
-  
-}
+  files: File = null
+  @ViewChild('regForm') regForm: NgForm;
 
 
-onFormSubmitted() {
-  const formvalue = this.regForm.value
-  this.srvc.user.push(formvalue);
-  this.srvc.signUp()
-  this.regForm.reset({
-    email: null,
-    username: null,
-    password: null
-  })
-}
+  constructor(private router: Router) { }
 
-removeUserds() {
-  this.srvc.emptyStorage();
-}
+  ngOnInit(): void {
+
+  }
+
+  selectImage(event) {
+    this.regForm.value.image = event.target.files[0];
+    if (event.target.files.length > 0) {
+      this.files = <File>event.target.files[0];
+      this.regForm.value.image = this.files;
+    }
+  }
+
+  onFormSubmitted() {
+    this.srvc.signUp(this.regForm, this.files).subscribe((res) => {
+      console.log(res);
+      if (res) {
+        alert("Successfully sighned");
+      }
+    }, (err) => {
+      console.log(err);
+    })
+    // this.regForm.reset({
+    //   email: null,
+    //   username: null,
+    //   password: null
+    // })
+  }
+
+
+  removeUserds() {
+    this.srvc.emptyStorage();
+  }
 
 }

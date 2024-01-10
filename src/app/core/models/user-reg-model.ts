@@ -4,14 +4,20 @@ export class LoginValueModel {
     regPassword: '';
 }
 
-export interface MainUser {
+export class MainUser {
     email:string;
     name: string;
     usrname: string;
     profileImg: string;
     _id: string
 }
-export class userDetails {
+export class UserDetails {
     totalUsers: number;
     datas
+}
+
+export class UserLoginVallues {
+    username:string;
+    password: string;
+
 }

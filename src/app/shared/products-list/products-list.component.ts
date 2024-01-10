@@ -1,6 +1,6 @@
 import { Input } from "@angular/core";
 import { Component } from '@angular/core';
-import { ProductModel } from "src/app/core/models/allproducts.model";
+import { ProductModel, ResponseProductView } from "src/app/core/models/allproducts.model";
 
 @Component({
   selector: 'app-products-list',
@@ -9,6 +9,6 @@ import { ProductModel } from "src/app/core/models/allproducts.model";
 })
 export class ProductsListComponent {
 
-  @Input() allProducts: ProductModel;
+  @Input() allProducts: ResponseProductView;
 
 }

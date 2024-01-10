@@ -1,20 +1,19 @@
 import { Injectable, inject } from '@angular/core';
 import { ProductModel } from '../models/allproducts.model';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { UserSrvcService } from './user-srvc.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserProductsService {
-  // http: HttpClient = inject(HttpClient)
+  http: HttpClient = inject(HttpClient);
+  srvc: UserSrvcService = inject(UserSrvcService)
 
-  // constructor() {
-  //   this.http.get('http://localhost:3000/api/users/products').subscribe((v) => {
-  //     console.log(v);
-  //   })
-  // }
+  cartIconCount: number = 0;
 
- 
+
 
   allProductsSrvc: ProductModel[] = [
     {
@@ -220,6 +219,20 @@ export class UserProductsService {
 
 
   ]
-
+  getProducts():Observable<object> {
+    return this.http.get('http://localhost:3000/api/users/products')
+  }
+  fleteringProductsAction(productCategory:string):Observable<object> {
+    return this.http.get(`http://localhost:3000/api/users/${productCategory}/category`);
+  }
+  viewProducts(id: string, prdctSrvctype?: string) {
+    return this.http.get(`http://localhost:3000/api/users/products_Id/${id}`)
+  }
+  CartFunction(cartId?: string) {
+    console.log(    this.srvc.userId
+      );
+    
+    // this.http.post('http://localhost:3000/api/users/65977f9361f1b077dbf4871b/cart')
+  }
 
 }

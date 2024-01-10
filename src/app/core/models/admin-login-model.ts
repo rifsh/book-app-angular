@@ -9,6 +9,7 @@ export interface adminlogin {
 }
 
 export interface adminLoginRes {
+    name:string,
     status: string,
     message: string,
     token: string

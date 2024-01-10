@@ -12,9 +12,6 @@ import { UserProductsService } from 'src/app/core/services/user-products.service
 export class AddProductComponent {
 
   file: File = null;
-
-  pushProducts: ProductModel[] = [];
-  prdctId: number = this.productSrvc.allProductsSrvc.length + 1;
   @ViewChild('prdctForm') formValues: NgForm;
 
   constructor(private srvc: AdminSrvcService, private productSrvc: UserProductsService) {
@@ -25,14 +22,16 @@ export class AddProductComponent {
     this.formValues.value.image = event.target.files[0];
     if (event.target.files.length > 0) {
       this.file = <File> event.target.files[0];
-      this.formValues.value.image = this.file; 
-      console.log(this.file.name);
-           
+      this.formValues.value.image = this.file;
     }
   }
 
   submit() {
-    this.srvc.addProducts(this.formValues, this.file)
-    // this.formValues.reset()
+    this.srvc.addProducts(this.formValues, this.file).subscribe((res) => {
+      alert(res);
+    }, (err) => {
+      alert(err.message);
+    })
+    this.formValues.reset()
   }
 }

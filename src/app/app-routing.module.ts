@@ -28,8 +28,8 @@ const routes: Routes = [
   {path:'sci-fi/:type', component:ScfiBooksComponent},
   {path:'history/:type', component:HistoryBooksComponent},
   {path:'horror/:type', component:HorrorBooksComponent},
-  {path:'viewproduct/:id', component:ViewProductComponent, canActivate:[sighnUpGuard]},
-  {path:'viewrelatedprdct/:id', component:RelatedprdctViewComponent},
+  {path:'viewproduct/:id/:category', component:ViewProductComponent},
+  {path:'viewrelatedprdct/:id/:category', component:RelatedprdctViewComponent},
   {path:'add-to-cart', component:AddToCartComponent},
   {path:'admin-login', loadChildren:()=> import('./admin/admin.module').then(m=>m.AdminModule)},
   {path:'admin-dashboard', component:DashboardComponent},
@@ -40,7 +40,7 @@ const routes: Routes = [
   {path:'edit-product/:id', component:EditPrdctComponent},
   {path:'**', component:ErrorUrlComponent},
 ];
-
+// canActivate:[sighnUpGuard]
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)

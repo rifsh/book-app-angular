@@ -23,7 +23,7 @@ export class NavBarComponent {
 
 
   constructor(private srvc: UserSrvcService,
-    private filterSrvc: FilterService,
+    private filterSrvc: UserProductsService,
     private route: Router
   ) {
 

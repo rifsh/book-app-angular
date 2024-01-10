@@ -1,10 +1,9 @@
 <div class="main" style="display: flex; flex: 1;">
     <app-admin-navbar></app-admin-navbar>
     <div class="user-main">
-        <h1 style="text-align: center;">products</h1>
+        <h1 style="text-align: center;">Products</h1>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Product title</th>
                 <th>Author</th>
                 <th>Image</th>
@@ -14,20 +13,19 @@
                 <th colspan="2">Actions</th>
             </tr>
             <tr *ngFor="let  i of allProdutcs">
-                <td>{{i.id}}</td>
                 <td>{{i.title}}</td>
                 <td>{{i.author}}</td>
                 <td>
                     <img [src]="i.image" alt="">
                 </td>
-                <td>{{i.dessc}}</td>
-                <td>{{i.type}}</td>
+                <td>{{i.description}}</td>
+                <td>{{i.category}}</td>
                 <td>{{i.price | currency: 'INR'}}</td>
                 <td style="text-align: center;">
-                    <button (click)="removeProducts(i.id)" mat-raised-button color="warn">Remove</button>
+                    <button (click)="removeProducts(i._id)" mat-raised-button color="warn">Remove</button>
                 </td>
                 <td style="text-align: center;">
-                    <button mat-flat-button [routerLink]="'/edit-product/'+(i.id)">Edit</button>
+                    <button mat-flat-button [routerLink]="'/edit-product/'+(i._id)">Edit</button>
                 </td>
             </tr>
         </table>

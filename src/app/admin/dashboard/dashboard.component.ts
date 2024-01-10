@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit{
 
   constructor(private srvc:UserSrvcService) {}
   ngOnInit(): void {
-      this.adminName = this.srvc.adminName;
+      this.adminName = this.srvc.adminname;
+      
   }
 }

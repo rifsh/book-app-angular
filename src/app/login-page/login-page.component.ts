@@ -1,7 +1,8 @@
 import { Component,inject,ViewChild } from '@angular/core';
 import { UserSrvcService } from '../core/services/user-srvc.service';
 import { NgForm } from '@angular/forms';
-import { logindetail } from '../core/models/login-model';
+import { LoginDetail } from '../core/models/login-model';
+import { UserLoginVallues } from '../core/models/user-reg-model';
 
 @Component({
   selector: 'app-login-page',
@@ -10,17 +11,18 @@ import { logindetail } from '../core/models/login-model';
 })
 export class LoginPageComponent {
 
-  loginarr:logindetail[]=[]
+  loginarr:LoginDetail[]=[]
 
   srvc:UserSrvcService = inject(UserSrvcService);
 
   @ViewChild('logForm') logForm:NgForm
 
   onLogin() {
-    
-    let usrName:string = this.logForm.value.userName;
-    let usrPassword:string = this.logForm.value.password;
-    this.srvc.login(usrName,usrPassword,this.logForm.value);
+    const userValues: UserLoginVallues = {
+      username: this.logForm.value.userName,
+      password: this.logForm.value.password
+    }
+    this.srvc.login(userValues);
     this.logForm.reset()
 }
 }

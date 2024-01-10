@@ -14,6 +14,7 @@ import { AdminModule } from './admin/admin.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminInterceptorInterceptor } from 'src/Interceptors/admin-interceptor.interceptor';
+import { UserInterceptorInterceptor } from 'src/Interceptors/user-interceptor';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { AdminInterceptorInterceptor } from 'src/Interceptors/admin-interceptor.
     )
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AdminInterceptorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: UserInterceptorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
