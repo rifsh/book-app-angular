@@ -7,7 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { json } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class UserSrvcService {
   http: HttpClient = inject(HttpClient);
 
   showSearchBox: boolean = true;
-  showCart: boolean = false;
+  showCart: boolean = true;
   isLogged: boolean = false;
   usrname: string;
   adminname: string;
@@ -62,7 +61,13 @@ export class UserSrvcService {
     this.http.post('http://localhost:3000/api/users/login', userValues).subscribe((res: LoginResponse) => {
       if (res.status === "Valid") {
         this.userId = res.user._id;
-        this.usrname = res.user.name;
+        localStorage.setItem('username', res.user.name);
+        this.usrname = localStorage.getItem('username');
+        if (this.usrname) {
+        this.showCart = true;
+        this.isLogged = true;
+        }
+        localStorage.setItem('userId', res.user._id);
         localStorage.setItem('userToken', res.token);
         this.toast.success("Log in Success");
         this.router.navigate(['all-products']);

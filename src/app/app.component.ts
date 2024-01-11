@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserSrvcService } from './core/services/user-srvc.service';
 import mongoose from 'mongoose';
 
@@ -7,13 +7,21 @@ import mongoose from 'mongoose';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'book-app';
 
-  constructor() {
+  constructor(private srvc: UserSrvcService) {
+    const token: string = localStorage.getItem('userToken');
+    const usrName: string = localStorage.getItem('username');
+
+    if (token) {
+      srvc.usrname = usrName;
+      srvc.isLogged = true;
+    }
   }
 
   ngOnInit(): void {
   }
+
 
 }

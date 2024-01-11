@@ -1,19 +1,21 @@
 import { Injectable, inject } from '@angular/core';
-import { ProductModel } from '../models/allproducts.model';
+import { ProductModel, ResponseProduct } from '../models/allproducts.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserSrvcService } from './user-srvc.service';
+import { CartResponseModel } from '../models/response-model';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserProductsService {
   http: HttpClient = inject(HttpClient);
-  srvc: UserSrvcService = inject(UserSrvcService)
+  srvc: UserSrvcService = inject(UserSrvcService);
+  toast: ToastrService = inject(ToastrService);
 
-  cartIconCount: number = 0;
-
-
+  cartIconCount: number;
 
   allProductsSrvc: ProductModel[] = [
     {
@@ -219,20 +221,36 @@ export class UserProductsService {
 
 
   ]
-  getProducts():Observable<object> {
-    return this.http.get('http://localhost:3000/api/users/products')
+  getProducts(): Observable<object> {
+    return this.http.get('http://localhost:3000/api/users/products');
   }
-  fleteringProductsAction(productCategory:string):Observable<object> {
+  fleteringProductsAction(productCategory: string): Observable<object> {
     return this.http.get(`http://localhost:3000/api/users/${productCategory}/category`);
   }
   viewProducts(id: string, prdctSrvctype?: string) {
-    return this.http.get(`http://localhost:3000/api/users/products_Id/${id}`)
+    return this.http.get(`http://localhost:3000/api/users/products_Id/${id}`);
   }
-  CartFunction(cartId?: string) {
-    console.log(    this.srvc.userId
-      );
-    
-    // this.http.post('http://localhost:3000/api/users/65977f9361f1b077dbf4871b/cart')
+  CartFunction(productId: string) {
+    const userId: string = localStorage.getItem('userId');
+    const prdctId = { productId: productId }
+    return this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId).subscribe((res: CartResponseModel) => {
+      if (res.message === 'Product is already present in the cart') {
+        this.toast.info(res.message);
+      } else {
+        this.toast.success(res.message);
+      }
+
+    }, (err) => {
+      alert(err.message)
+    });
+  }
+  fetchCartProducts() {
+    const userId: string = localStorage.getItem('userId');
+    return this.http.get(`http://localhost:3000/api/users/${userId}/cart`);
+  }
+  deleteCartProducts(productId: string, userId: string) {
+    const prdctId = {productId: productId}
+    return this.http.post(`http://localhost:3000/api/users/${userId}/deletecart`,prdctId)
   }
 
 }

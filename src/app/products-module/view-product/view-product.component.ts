@@ -15,15 +15,16 @@ export class ViewProductComponent {
   relatedProduct: ResponseProductView[] = [];
 
   type: string;
-  cartIncerment: number = 0;
+  cartIncerment: number;
 
 
   constructor(private activateRoute: ActivatedRoute, private srvc: UserProductsService, private srvcUser: UserSrvcService) { 
-    srvcUser.showSearchBox = false;
   }
 
   ngOnInit(): void {
     let productId: string;
+    this.srvcUser.showSearchBox = false;
+    this.srvcUser.showCart = true;
     let routeParam: string = this.activateRoute.snapshot.paramMap.get("id");
     let categoryParam: string = this.activateRoute.snapshot.paramMap.get("category");
     this.srvc.viewProducts(routeParam).subscribe((resm: ResponseProduct) => {
@@ -33,11 +34,10 @@ export class ViewProductComponent {
         this.relatedProduct = this.relatedProduct.filter((x) => { return x._id != resm.id });
       })
     });
-    this.cartIncerment = this.srvc.cartIconCount;
   }
 
   addToCart(prdctid: string) {
     this.srvc.CartFunction(prdctid);
-    this.cartIncerment = this.srvc.cartIconCount
+    
   }
 }

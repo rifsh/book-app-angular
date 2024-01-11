@@ -11,7 +11,7 @@ import { HistoryBooksComponent } from './history-books/history-books.component';
 import { FormsModule } from '@angular/forms';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { RelatedprdctViewComponent } from './relatedprdct-view/relatedprdct-view.component';
-import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
+import { AddToCartComponent } from './view-cart/view-cart';
 
 const routes:Routes = [
   {path:'', component: AllProdutsComponent},

@@ -9,7 +9,7 @@ import { MatModule } from '../mat-module/mat/mat.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AllProdutsComponent } from '../products-module/all-produts/all-produts.component';
 import { ProductsModuleModule } from '../products-module/products-module.module';
-import { AddToCartComponent } from '../products-module/add-to-cart/add-to-cart.component';
+import { AddToCartComponent } from '../products-module/view-cart/view-cart';
 import { ViewProductComponent } from '../products-module/view-product/view-product.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 

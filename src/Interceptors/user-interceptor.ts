@@ -18,10 +18,6 @@ export class UserInterceptorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const localValues = localStorage.getItem('userToken');
     // console.log(token);
-    
-    
-    this.usrsrvc.isLogged = true;
-    this.usrsrvc.showCart = true;
     request = request.clone({
       setHeaders:{
         Authorization: `bearer ${localValues}`

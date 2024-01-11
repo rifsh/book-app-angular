@@ -1,4 +1,4 @@
-import { Component, EventEmitter,Output,Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/core/models/allproducts.model';
 import { FilterService } from 'src/app/core/services/filter.service';
@@ -19,30 +19,22 @@ export class NavBarComponent {
   searchValue: string;
   searchedArray: ProductModel[] = [];
   cartCount: number;
-  usrname:string;
+  usrname: string;
 
 
-  constructor(private srvc: UserSrvcService,
-    private filterSrvc: UserProductsService,
-    private route: Router
-  ) {
+  constructor(private srvc: UserSrvcService, private route: Router, private usrSrvc: UserProductsService) {}
 
-  }
-
-  @Output() 
-  searchText:EventEmitter<string> = new EventEmitter<string>;
-  @Input() cartIconCount:number;
-
-
+  @Output()  searchText: EventEmitter<string> = new EventEmitter<string>;
+  @Input() cartIconCount: number;
 
 
   dropdownValue(drpValue: string) {
     this.drpdownValue = drpValue;
   }
   ngOnInit(): void {
+    this.cartCount = this.usrSrvc.cartIconCount;
     this.searchCondition = this.srvc.showSearchBox;
     this.showcart = this.srvc.showCart;
-    this.cartCount = this.filterSrvc.cartIconCount;
     this.logLinkShow = !this.srvc.isLogged;
     this.logoutLinkShow = this.srvc.isLogged;
     this.usrname = this.srvc.usrname;
@@ -54,8 +46,8 @@ export class NavBarComponent {
   searchOperation() {
     this.searchText.emit(this.searchValue);
   }
-
   logOut() {
+    localStorage.removeItem('userToken');
     this.srvc.isLogged = false;
     this.route.navigate(['login']);
   }

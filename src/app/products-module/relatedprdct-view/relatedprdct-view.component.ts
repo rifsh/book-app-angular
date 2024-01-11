@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel, ResponseProduct, ResponseProductView } from '../../core/models/allproducts.model';
+import { ResponseProduct, ResponseProductView } from '../../core/models/allproducts.model';
 import { ActivatedRoute } from '@angular/router';
 import { UserSrvcService } from '../../core/services/user-srvc.service';
-import { FilterService } from 'src/app/core/services/filter.service';
 import { UserProductsService } from 'src/app/core/services/user-products.service';
 
 @Component({
@@ -14,13 +13,13 @@ export class RelatedprdctViewComponent implements OnInit{
   productsView:ResponseProductView[]=[];
   relatedProduct:ResponseProductView []=[];
   type:string;
-  cartIncrement:number = 0;
+  cartIncrement:number;
 
   constructor( private activateRoute:ActivatedRoute,private srvc:UserProductsService,private srvcUser:UserSrvcService ) {
   }
 
   ngOnInit(): void {
-    let routeparam = this.activateRoute.snapshot.paramMap.get("id");
+    this.srvcUser.showCart = true;
     let routeParam: string = this.activateRoute.snapshot.paramMap.get("id");
     let categoryParam: string = this.activateRoute.snapshot.paramMap.get("category");
     this.srvc.viewProducts(routeParam).subscribe((resm: ResponseProduct) => {
@@ -32,9 +31,7 @@ export class RelatedprdctViewComponent implements OnInit{
     })
     this.srvcUser.showSearchBox = false;
   }
-
   addToCart(prdctid:string) {
-  //   this.srvc.CartFunction(prdctid);
-  //   this.cartIncrement = this.srvc.cartIconCount;
+    this.srvc.CartFunction(prdctid)
   }
 }

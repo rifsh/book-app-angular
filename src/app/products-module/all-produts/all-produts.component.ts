@@ -23,6 +23,8 @@ export class AllProdutsComponent {
 
   ngOnInit(): void {
     this.usrsrvc.showSearchBox = true;
+    console.log(this.usrsrvc.isLogged);
+    
     if (this.usrsrvc.isLogged) {
       this.usrsrvc.showCart = true;
     }

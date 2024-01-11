@@ -51,12 +51,10 @@
             </div>
           </a></li> -->
           
-          <div class="demo-section d-flex align-items-center" *ngIf="showcart" >
-            <mat-icon style="cursor: pointer;" [matBadge]="cartIconCount" matBadgeColor="warn" routerLink="/add-to-cart">shopping_cart</mat-icon>
-              <!-- Include text description of the icon's meaning for screen-readers -->
-              <span class="cdk-visually-hidden">
-                Example with a home icon with overlaid badge showing the number 15
-              </span>
+          <div class="demo-section d-flex align-items-center" style="cursor: pointer;" *ngIf="showcart" >
+            <mat-icon role="img" aria-hidden="false" aria-label="Shopping cart" tabindex="0" [matBadge]="cartIconCount" matBadgeColor="warn" routerLink="/add-to-cart" style="cursor: pointer;">shopping_cart</mat-icon>
+            <!-- <mat-icon style="cursor: pointer;" [matBadge]="cartIconCount" matBadgeColor="warn" routerLink="/add-to-cart">shopping_cart</mat-icon> -->
+              <Span>Cart</Span>
           </div>
         </ul>
       </div>

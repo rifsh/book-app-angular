@@ -12,8 +12,8 @@ export const sighnUpGuard: CanActivateFn = () => {
   const srvc: UserSrvcService = inject(UserSrvcService);
   const toast: ToastrService = inject(ToastrService)
   const route: Router = inject(Router);
-
-  if (srvc.isLogged) {
+  const token: string = localStorage.getItem('userToken')
+  if (token) {
     return true;
   } else {
     toast.info('Please login');
