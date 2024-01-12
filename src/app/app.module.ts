@@ -40,6 +40,7 @@ import { UserInterceptorInterceptor } from 'src/Interceptors/user-interceptor';
     )
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AdminInterceptorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: UserInterceptorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

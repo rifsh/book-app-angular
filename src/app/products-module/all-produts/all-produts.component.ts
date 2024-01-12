@@ -23,9 +23,9 @@ export class AllProdutsComponent {
 
   ngOnInit(): void {
     this.usrsrvc.showSearchBox = true;
-    console.log(this.usrsrvc.isLogged);
-    
-    if (this.usrsrvc.isLogged) {
+    const token: string = localStorage.getItem('userToken');
+    if (token) {
+      this.usrsrvc.isLogged = true;
       this.usrsrvc.showCart = true;
     }
     this.srvc.getProducts().subscribe((res: ResponseProduct) => {

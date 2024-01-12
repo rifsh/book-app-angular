@@ -11,8 +11,7 @@ import { AdminProductsComponent } from './admin-products/admin-products.componen
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditPrdctComponent } from './edit-prdct/edit-prdct.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AdminInterceptorInterceptor } from 'src/Interceptors/admin-interceptor.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [
   { path: '', component: AdminLoginComponent },
@@ -27,13 +26,19 @@ const routes: Routes = [
     EditProductComponent,
     AddProductComponent,
     EditPrdctComponent,
+    
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes),
     MatModule,
-    SharedModule
+    SharedModule,
+    ToastrModule.forRoot(
+      {
+        timeOut: 2000,
+      }
+    )
   ],
 })
 export class AdminModule { }

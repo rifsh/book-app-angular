@@ -8,7 +8,7 @@ export class MainUser {
     email:string;
     name: string;
     usrname: string;
-    profileImg: string;
+    image: string;
     _id: string
 }
 export class UserDetails {

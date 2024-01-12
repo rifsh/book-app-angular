@@ -6,16 +6,21 @@ import { UserSrvcService } from '../services/user-srvc.service';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
-export class LandingPageComponent implements OnInit{
+export class LandingPageComponent implements OnInit {
 
-constructor(  private srvc:UserSrvcService ) {}
+  constructor(private srvc: UserSrvcService) { }
 
-ngOnInit(): void {
-  const usrName:string = localStorage.getItem('username')
-  this.srvc.showSearchBox = false;
-  this.srvc.showCart = false;
-  this.srvc.isLogged = true;
-  this.srvc.usrname = usrName;
-}
+  ngOnInit(): void {
+    const token: string = localStorage.getItem('userToken');
+    const userName: string = localStorage.getItem('username');
+    this.srvc.showSearchBox = false;
+    this.srvc.showCart = false;
+    if (token) {
+      this.srvc.usrname = userName;
+      this.srvc.isLogged = true;
+    }else {
+      this.srvc.usrname = 'Please login';
+    }
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { UserSrvcService } from './core/services/user-srvc.service';
 import mongoose from 'mongoose';
 
@@ -17,11 +17,19 @@ export class AppComponent implements OnInit {
     if (token) {
       srvc.usrname = usrName;
       srvc.isLogged = true;
+    } else {
+      srvc.isLogged = false;
     }
   }
 
   ngOnInit(): void {
   }
+
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeUnloadHander(event: BeforeUnloadEvent) {
+  //   localStorage.clear();
+  // }
+
 
 
 }

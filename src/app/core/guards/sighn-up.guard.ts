@@ -17,7 +17,7 @@ export const sighnUpGuard: CanActivateFn = () => {
     return true;
   } else {
     toast.info('Please login');
-    route.navigate(['sign-up']);
+    route.navigate(['login']);
     return false;
   }
 

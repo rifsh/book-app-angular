@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnInit, inject } from '@angular/core';
 import { LoginValueModel, UserDetails, UserLoginVallues } from '../models/user-reg-model';
 import { Router, RouterLink } from '@angular/router';
 import { LoginDetail, LoginResponse } from '../models/login-model';
@@ -11,12 +11,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserSrvcService {
+export class UserSrvcService implements OnInit {
 
   http: HttpClient = inject(HttpClient);
 
   showSearchBox: boolean = true;
-  showCart: boolean = true;
+  showCart: boolean = false;
   isLogged: boolean = false;
   usrname: string;
   adminname: string;
@@ -26,13 +26,13 @@ export class UserSrvcService {
     adminUsername: 'rifash', adminPassword: '1122'
   }];
 
-  constructor(private router: Router, private toast: ToastrService) {
-    const localdata = localStorage.getItem('signUpUsers');
-    if (localdata != null) {
-      this.user = JSON.parse(localdata);
+  ngOnInit(): void {
+    const token: string = localStorage.getItem('userToken');
+    if (token) {
+      this.isLogged = true;
     }
-    localStorage.setItem('adminLoginValues', JSON.stringify(this.adminLoginValues));
-
+  }
+  constructor(private router: Router, private toast: ToastrService) {
   }
 
   logindatas: object[] = [];
@@ -64,8 +64,8 @@ export class UserSrvcService {
         localStorage.setItem('username', res.user.name);
         this.usrname = localStorage.getItem('username');
         if (this.usrname) {
-        this.showCart = true;
-        this.isLogged = true;
+          this.showCart = true;
+          // this.isLogged = true;
         }
         localStorage.setItem('userId', res.user._id);
         localStorage.setItem('userToken', res.token);

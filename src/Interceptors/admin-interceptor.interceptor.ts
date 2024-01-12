@@ -14,11 +14,13 @@ export class AdminInterceptorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const localToken = localStorage.getItem('token');
-    request = request.clone({
-      setHeaders:{
-        Authorization: `Bearer ${localToken}`
-      }
-    })
+    if (localToken) { 
+      request = request.clone({
+        setHeaders:{
+          Authorization: `Bearer ${localToken}`
+        }
+      })
+    }
     return next.handle(request);
   }
 }

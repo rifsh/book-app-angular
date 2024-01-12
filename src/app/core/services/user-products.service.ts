@@ -230,7 +230,7 @@ export class UserProductsService {
   viewProducts(id: string, prdctSrvctype?: string) {
     return this.http.get(`http://localhost:3000/api/users/products_Id/${id}`);
   }
-  CartFunction(productId: string) {
+  CartFunction(productId?: string) {
     const userId: string = localStorage.getItem('userId');
     const prdctId = { productId: productId }
     return this.http.post(`http://localhost:3000/api/users/${userId}/cart`, prdctId).subscribe((res: CartResponseModel) => {
@@ -239,9 +239,10 @@ export class UserProductsService {
       } else {
         this.toast.success(res.message);
       }
+      return res.totalPrice
 
     }, (err) => {
-      alert(err.message)
+      this.toast.warning('Something went wrong')
     });
   }
   fetchCartProducts() {

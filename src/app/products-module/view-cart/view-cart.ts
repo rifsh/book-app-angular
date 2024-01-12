@@ -27,9 +27,12 @@ export class AddToCartComponent {
   ngOnInit(): void {
     this.usrSrvc.showSearchBox = false;
     this.usrSrvc.showCart = false;
+
     this.productSrvc.fetchCartProducts().subscribe((res: ResponseProduct) => {
       this.products = res.datas;
+      console.log(res);
       this.totalQuanndity = res.totalProducts;
+      this.productSrvc.CartFunction();
     }, (err) => {
       console.log(err.message);
     });
@@ -46,13 +49,13 @@ export class AddToCartComponent {
   }
 
   deletePrdctCart(prdcts: string) {
-      this.prdctsSrvc.deleteCartProducts(prdcts, this.userid).subscribe((res: CartResponseModel)=>{
-        this.toast.info(res.message);
-        this.productSrvc.fetchCartProducts().subscribe((res: ResponseProduct) => {
-          this.products = res.datas;
-          this.totalQuanndity = res.totalProducts;
-        });
-      })
+    this.prdctsSrvc.deleteCartProducts(prdcts, this.userid).subscribe((res: CartResponseModel) => {
+      this.toast.info(res.message);
+      this.productSrvc.fetchCartProducts().subscribe((res: ResponseProduct) => {
+        this.products = res.datas;
+        this.totalQuanndity = res.totalProducts;
+      });
+    })
   }
 
 }

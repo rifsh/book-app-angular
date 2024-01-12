@@ -1,4 +1,4 @@
-<div class="main" style="display: flex; flex: 1;">
+<div class="main" style="display: flex;">
     <app-admin-navbar></app-admin-navbar>
     <div class="user-main">
         <h4>Users</h4>
@@ -6,10 +6,14 @@
             <tr>
                 <th>User name</th>
                 <th>Email</th>
+                <!-- <th>Image</th> -->
             </tr>
             <tr *ngFor="let i of userlow">
                 <td>{{i.name}}</td>
                 <td>{{i.email}}</td>
+                <!-- <td>
+                    <img class="rounded" [src]="i.image" alt="">
+                </td> -->
             </tr>
         </table>
     </div>

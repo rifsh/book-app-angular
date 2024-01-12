@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ProductModel } from 'src/app/core/models/allproducts.model';
 import { AdminSrvcService } from 'src/app/core/services/admin-srvc.service';
 import { UserProductsService } from 'src/app/core/services/user-products.service';
@@ -12,6 +13,7 @@ import { UserProductsService } from 'src/app/core/services/user-products.service
 export class AddProductComponent {
 
   file: File = null;
+  toast: ToastrService = inject(ToastrService)
   @ViewChild('prdctForm') formValues: NgForm;
 
   constructor(private srvc: AdminSrvcService, private productSrvc: UserProductsService) {
@@ -28,9 +30,9 @@ export class AddProductComponent {
 
   submit() {
     this.srvc.addProducts(this.formValues, this.file).subscribe((res) => {
-      alert(res);
+      this.toast.success("Product is added");
     }, (err) => {
-      alert(err.message);
+      this.toast.warning("Something went wrong");
     })
     this.formValues.reset()
   }
