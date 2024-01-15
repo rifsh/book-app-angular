@@ -4,3 +4,8 @@ export class CartResponseModel {
     totalPrice?: number;
     totalProducts?: number;
 }
+
+export class PaymentResponseModel {
+    status: string;
+    link: string;
+}

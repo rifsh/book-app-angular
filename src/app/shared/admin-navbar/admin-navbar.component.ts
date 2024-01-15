@@ -18,4 +18,7 @@ export class AdminNavbarComponent implements OnInit{
 
   ngOnInit(): void {
   }
+  logout() {
+    localStorage.removeItem('token');
+  }
 }

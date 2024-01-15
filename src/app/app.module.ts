@@ -38,6 +38,7 @@ import { UserInterceptorInterceptor } from 'src/Interceptors/user-interceptor';
         timeOut: 2000,
       }
     )
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AdminInterceptorInterceptor, multi: true },

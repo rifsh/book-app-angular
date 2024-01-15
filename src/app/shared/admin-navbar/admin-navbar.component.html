@@ -14,7 +14,7 @@
                 <a mat-list-item routerLink="/admin-products">Products</a>
                 <a mat-list-item routerLink="/add-product">Add products</a>
             </mat-nav-list>
-            <a style="text-decoration: none; color: black; align-items: center;" routerLink="/login">Logout</a>
+            <a style="text-decoration: none; color: black; align-items: center;"(click)="logout()" routerLink="/login">Logout</a>
         </mat-sidenav>
         <mat-sidenav-content>
             <div >

@@ -34,6 +34,6 @@ export class AddProductComponent {
     }, (err) => {
       this.toast.warning("Something went wrong");
     })
-    this.formValues.reset()
+    // this.formValues.reset()
   }
 }

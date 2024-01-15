@@ -21,4 +21,5 @@ export class ResponseProduct {
     id?: string;
     totalProducts?: number;
     datas;
+    totalPrice: number;
 }

@@ -1,10 +1,13 @@
 import { Injectable, inject } from '@angular/core';
-import { ProductModel, ResponseProduct } from '../models/allproducts.model';
+import { ProductModel } from '../models/allproducts.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserSrvcService } from './user-srvc.service';
 import { CartResponseModel } from '../models/response-model';
 import { ToastrService } from 'ngx-toastr';
+import { ObjectId } from 'mongoose';
+import * as io from 'socket.io-client';
+
 
 
 @Injectable({
@@ -15,7 +18,12 @@ export class UserProductsService {
   srvc: UserSrvcService = inject(UserSrvcService);
   toast: ToastrService = inject(ToastrService);
 
+  totalPrice: number = 0
   cartIconCount: number;
+
+  // private subject: WebSocketSubject
+
+  // constructor(private socket: ) { }
 
   allProductsSrvc: ProductModel[] = [
     {
@@ -40,27 +48,27 @@ export class UserProductsService {
     },
     {
       id: 10, title: 'The Jinn-Bot of Shantiport', author: 'Samit Basu', type: 'sci-fi',
-      dessc: `Shantiport was supposed to be a gateway to the stars. But the city is sinking, and its colonist rulers aren’t helping anyone but themselves.`,
+      dessc: `Shantiport was supposed to be a gateway to the stars. But the city is sinking, and its colonist rulers arent helping anyone but themselves.`,
       image: '../../assets/all books/the-jinnbot-sc-fi.jpg', price: 1000, quandity: 1
     },
     {
       id: 5, title: 'The Bourne Identity', author: 'Robert Ludlum', type: 'action',
-      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankind’s most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
+      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankinds most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
       image: '../../assets/all books/rebert-lolum.jpg', price: 100, quandity: 1
     },
     {
       id: 6, title: 'The Count of Cristo', author: 'Alexandre Dumas', type: 'action',
-      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankind’s most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
+      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankinds most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
       image: '../../assets/all books/the count.jpg', price: 350, quandity: 1
     },
     {
       id: 7, title: 'Dune', author: 'Frank Herbert', type: 'action',
-      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankind’s most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
+      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankinds most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
       image: '../../assets/all books/dune.jpg', price: 240, quandity: 1
     },
     {
       id: 8, title: 'The Fellowship of the Ring', author: 'J.R.R. Tolkien', type: 'action',
-      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankind’s most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
+      dessc: `An astonishing technique for recovering and cloning dinosaur DNA has been discovered. Now humankind most thrilling fantasies have come true. Creatures extinct for eons roam Jurassic Park with their awesome presence and profound mystery, and all the world can visit them—for a price.`,
       image: '../../assets/all books/the feeloship.jpg', price: 560, quandity: 1
     },
     // sci-fi//
@@ -221,7 +229,9 @@ export class UserProductsService {
 
 
   ]
-  getProducts(): Observable<object> {
+
+  //Product functions
+  getProducts() {
     return this.http.get('http://localhost:3000/api/users/products');
   }
   fleteringProductsAction(productCategory: string): Observable<object> {
@@ -239,19 +249,28 @@ export class UserProductsService {
       } else {
         this.toast.success(res.message);
       }
-      return res.totalPrice
+      this.totalPrice = res.totalPrice;
 
     }, (err) => {
-      this.toast.warning('Something went wrong')
+      console.log(err);
+      this.toast.warning('Something went wrong');
     });
   }
   fetchCartProducts() {
     const userId: string = localStorage.getItem('userId');
     return this.http.get(`http://localhost:3000/api/users/${userId}/cart`);
+
+  }
+  quandityIncr(productId: ObjectId) {
+    const userId: string = localStorage.getItem('userId');
+    return this.http.get(`http://localhost:3000/api/users/${userId}/increment`)
   }
   deleteCartProducts(productId: string, userId: string) {
-    const prdctId = {productId: productId}
-    return this.http.post(`http://localhost:3000/api/users/${userId}/deletecart`,prdctId)
+    const prdctId = { productId: productId }
+    return this.http.post(`http://localhost:3000/api/users/${userId}/deletecart`, prdctId)
+  }
+  paymentSection():Observable<object> {
+    return this.http.get('http://localhost:3000/api/users/65a1065d66be826823822295/payment')
   }
 
 }

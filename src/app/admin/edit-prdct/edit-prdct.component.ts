@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { ProductModel, ResponseProduct, ResponseProductView } from 'src/app/core/models/allproducts.model';
 import { AdminSrvcService } from 'src/app/core/services/admin-srvc.service';
 import { UserProductsService } from 'src/app/core/services/user-products.service';
@@ -13,6 +14,7 @@ import { UserProductsService } from 'src/app/core/services/user-products.service
 export class EditPrdctComponent implements OnInit {
 
   @ViewChild('editprdctForm') editForm: NgForm;
+  toast:ToastrService =  inject(ToastrService);
 
   file: File = null
   prdcts: ResponseProductView;
@@ -60,7 +62,7 @@ export class EditPrdctComponent implements OnInit {
 
   editPrdct() {
     this.srvc.editPrdct(this.prdctId, this.file, this.editForm).subscribe((res) => {
-      alert("Success")
+      this.toast.success("Success fully updated")
       this.route.navigate(['admin-products']);
     }, (err) => {
       console.log(err);

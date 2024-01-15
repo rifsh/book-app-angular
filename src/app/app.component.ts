@@ -1,15 +1,14 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { UserSrvcService } from './core/services/user-srvc.service';
-import mongoose from 'mongoose';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnDestroy {
   title = 'book-app';
-
+  
   constructor(private srvc: UserSrvcService) {
     const token: string = localStorage.getItem('userToken');
     const usrName: string = localStorage.getItem('username');
@@ -22,14 +21,14 @@ export class AppComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
-
+  
   // @HostListener('window:beforeunload', ['$event'])
   // beforeUnloadHander(event: BeforeUnloadEvent) {
-  //   localStorage.clear();
-  // }
-
+  //     localStorage.clear();
+  //   }
+    
+    ngOnDestroy(): void {
+    }
 
 
 }

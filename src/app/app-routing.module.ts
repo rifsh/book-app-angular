@@ -17,6 +17,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { EditProductComponent } from './admin/edit-product/edit-product.component';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { EditPrdctComponent } from './admin/edit-prdct/edit-prdct.component';
+import { adminGuard } from './core/guards/admin-quard.guard';
 
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./core/core.module').then(m => m.CoreModule) },
@@ -30,9 +31,10 @@ const routes: Routes = [
   { path: 'horror/:type', component: HorrorBooksComponent },
   { path: 'viewproduct/:id/:category', canActivate: [sighnUpGuard], component: ViewProductComponent },
   { path: 'viewrelatedprdct/:id/:category', component: RelatedprdctViewComponent },
-  { path: 'add-to-cart', component: AddToCartComponent },
+  { path: 'view-cart', component: AddToCartComponent },
+  //Admin
   { path: 'admin-login', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-  { path: 'admin-dashboard', component: DashboardComponent },
+  { path: 'admin-dashboard',canActivate: [adminGuard], component: DashboardComponent },
   { path: 'admin-users', component: AdminUsersComponent },
   { path: 'admin-products', component: AdminProductsComponent },
   { path: 'admin-edit', component: EditProductComponent },

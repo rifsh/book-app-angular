@@ -48,6 +48,8 @@ export class NavBarComponent {
   }
   logOut() {
     localStorage.removeItem('userToken');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
     this.srvc.isLogged = false;
     this.route.navigate(['login']);
   }

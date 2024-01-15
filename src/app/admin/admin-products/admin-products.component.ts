@@ -18,7 +18,8 @@ export class AdminProductsComponent implements OnInit {
   ngOnInit(): void {
     this.adminSrvc.getProducts().subscribe((res: ResponseProduct) => {
       this.allProdutcs = res.datas;
-    }, (err) => {
+      
+    }, (err) => {      
     });
   }
 
